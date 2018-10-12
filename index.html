@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Store Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" media="screen" href="/styles/main.css" />
+</head>
+
+<body>
+
+    <div class="attendant-block attendant-box">
+        <div class="logo">
+            <img src="/images/22.png" />
+        </div>
+        <form>
+            <input type="text" placeholder="Username" id="username" name="username" class="username" />
+            <input type="password" placeholder="Password" id="password" name="password" class="password" />
+            <a href="http://www.google.com"><input type="button" value="Log In" id="loginbutton" name="loginbutton"
+                    class="login" /></a>
+        </form>
+        <p class="not-registered">Not an Attendant? <strong id="show">Login as Admin</strong></p>
+    </div>
+    <div class="attendant-block admin-box">
+        <div class="logo">
+            <img src="/images/21.png" />
+        </div>
+        <form>
+            <input type="text" placeholder="Username" id="adminUsername" name="adminUsername" class="username" />
+            <input type="password" placeholder="Password" id="adminPassword" name="adminPassword" class="password" />
+            <a href="http://www.google.com"><input type="button" value="Log In" id="adminLoginButton" name="adminLoginButton"
+                    class="login" /></a>
+        </form>
+        <p class="have-account">Not an Admin ? <strong id="hide">Login as Attendant</strong></p>
+    </div>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>
