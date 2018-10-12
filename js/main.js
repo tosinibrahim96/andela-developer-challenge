@@ -3,7 +3,7 @@ const sidebar = document.getElementById("sidebar");
 let input, filter, table, tr, td, i;
 input = document.getElementById("myInput");
 
-$document.ready(() => {
+$(document).ready(() => {
 	$(".admin-box").hide();
 	$("#show").click(function() {
 		$(".attendant-box").hide();
