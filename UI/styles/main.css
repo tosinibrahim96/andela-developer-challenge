@@ -79,6 +79,7 @@ body {
 /*End of sidebar*/
 
 /*Login page*/
+
 .attendant-block {
 	width: 320px;
 	padding: 20px;
@@ -103,32 +104,38 @@ body {
 }
 
 .fullname {
-	background: #fff url("/images/5.png") 20px top no-repeat;
+	background: #fff url("/andela-developer-challenge/images/5.png") 20px top
+		no-repeat;
 	background-size: 16px 80px;
 }
 
 .fullname:focus {
-	background: #fff url("/images/5.png") 20px bottom no-repeat;
+	background: #fff url("/andela-developer-challenge/images/5.png") 20px bottom
+		no-repeat;
 	background-size: 16px 80px;
 }
 
 .username {
-	background: #fff url("/images/4.png") 20px top no-repeat;
+	background: #fff url("/andela-developer-challenge/images/4.png") 20px top
+		no-repeat;
 	background-size: 16px 80px;
 }
 
 .username:focus {
-	background: #fff url("/images/4.png") 20px bottom no-repeat;
+	background: #fff url("/andela-developer-challenge/images/4.png") 20px bottom
+		no-repeat;
 	background-size: 16px 80px;
 }
 
 .password {
-	background: #fff url("/images/3.png") 20px top no-repeat;
+	background: #fff url("/andela-developer-challenge/images/3.png") 20px top
+		no-repeat;
 	background-size: 16px 80px;
 }
 
 .password:focus {
-	background: #fff url("/images/3.png") 20px bottom no-repeat;
+	background: #fff url("/andela-developer-challenge/images/3.png") 20px bottom
+		no-repeat;
 	background-size: 16px 80px;
 }
 
@@ -467,7 +474,7 @@ table th.r {
 }
 
 #myInput {
-	background-image: url("/images/searchicon.png"); /* Add a search icon to input */
+	background-image: url("/andela-developer-challenge/images/searchicon.png"); /* Add a search icon to input */
 	background-position: 10px 12px; /* Position the search icon */
 	background-repeat: no-repeat; /* Do not repeat the icon image */
 	width: 90%; /* Full-width */
