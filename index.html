@@ -13,30 +13,31 @@
 <body>
     <div class="login-wrapper">
         <div class="attendant-block attendant-box">
+            <!-- <img id="login-image" src="./andela-developer-challenge/images/log.jpeg" alt="store image"> -->
             <h1 class="login-title">shoppy store attendant</h1>
             <div class="logo">
                 <img src="/andela-developer-challenge/images/22.png" />
             </div>
-            <form>
+            <form class="login-form">
                 <input type="text" placeholder="Username" id="username" name="username" class="username" />
                 <input type="password" placeholder="Password" id="password" name="password" class="password" />
                 <a href="/andela-developer-challenge/attendant/index.html"><input type="button" value="Log In" id="loginbutton"
                         name="loginbutton" class="login" /></a>
             </form>
-            <p class="not-registered">Not an Attendant? <strong id="show">Login as Admin</strong></p>
+            <p class="not-registered">Not an Attendant? <strong id="show">Login as Manager</strong></p>
         </div>
         <div class="attendant-block admin-box">
             <h1 class="login-title">shoppy store manager</h1>
             <div class="logo">
                 <img src="/andela-developer-challenge/images/21.png" />
             </div>
-            <form>
+            <form class="login-form">
                 <input type="text" placeholder="Username" id="adminUsername" name="adminUsername" class="username" />
                 <input type="password" placeholder="Password" id="adminPassword" name="adminPassword" class="password" />
                 <a href="/andela-developer-challenge/admin/index.html"><input type="button" value="Log In" id="adminLoginButton"
                         name="adminLoginButton" class="login" /></a>
             </form>
-            <p class="have-account">Not an Admin ? <strong id="hide">Login as Attendant</strong></p>
+            <p class="have-account">Not an Manager ? <strong id="hide">Login as Attendant</strong></p>
         </div>
     </div>
     <script src="/andela-developer-challenge/js/jquery.js"></script>

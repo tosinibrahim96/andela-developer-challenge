@@ -4,7 +4,7 @@
 <head>
    <meta charset="utf-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>Product Info</title>
+   <title>Attendant Info</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,500' rel='stylesheet' type='text/css'>
    <link rel="stylesheet" media="screen" href="/andela-developer-challenge/styles/main.css" />
@@ -35,7 +35,7 @@
                <a href="sales.html">
                   <li><i class="fas fa-dollar-sign"></i> sales</li>
                </a>
-               <a href="/andela-developer-challenge/index.html">
+               <a href="../../index.html">
                   <li><i class="fas fa-sign-out-alt"></i> logout</li>
                </a>
 
@@ -45,103 +45,228 @@
       </div>
       <!-- End of left side -->
       <div class="right">
-         <h2 class="container-title">attendants</h2>
-         <div class="up-info-container">
-            <a href="#">
-               <h2 class="view-all add-product"><i class="fas fa-plus"></i> add attendant</h2>
-            </a>
-            <div class="info-block">
-               <div class="info-block-header info-block-header4">
-                  <h2><i class="fas fa-people-carry"></i></h2>
-               </div>
-               <div class="info-block-content">
-                  <h3>number of staffs</h3>
-                  <p>12</p>
-               </div>
-               <div class="info-block-footer">
-                  <p><i class="fas fa-calendar-alt"></i> last employment date <span class="date">20/12/2018</span></p>
+         <h2 class="attendant-container-title">attendants</h2>
+         <p class="tell-a-friend">attendants with top sales record</p>
+         <button class="add"><i class="fas fa-plus"></i> add attendant
+         </button>
+         <div class="up-info-container attendant-info-container">
+            <div class="attendant-info-block">
+               <div class="pic-block"> <img src="../images/rihanna.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+
+                  </ul>
                </div>
             </div>
             <!-- info-block -->
-            <div class="info-block ">
-               <div class="info-block-header info-block-header5">
-                  <h2><i class="fas fa-user-alt"></i></h2>
-               </div>
-               <div class="info-block-content">
-                  <h3>staffs on duty</h3>
-                  <p>8</p>
-               </div>
-               <div class="info-block-footer">
-                  <p><i class="far fa-clock"></i> last 24 hours</p>
+            <div class="attendant-info-block">
+               <div class="pic-block"> <img src="../images/pitbull.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+
+                  </ul>
                </div>
             </div>
             <!-- info-block -->
-            <div class="info-block ">
-               <div class="info-block-header info-block-header6">
-                  <h2><i class="fas fa-user-alt"></i></h2>
+            <div class="attendant-info-block">
+               <div class="pic-block"> <img src="../images/selena.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+
+                  </ul>
                </div>
-               <div class="info-block-content">
-                  <h3>staffs off duty</h3>
-                  <p>4</p>
+            </div>
+            <!-- info-block -->
+            <div class="attendant-info-block">
+               <div class="pic-block"> <img src="../images/justin.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+
+                  </ul>
                </div>
-               <div class="info-block-footer">
-                  <p><i class="far fa-clock"></i> last 24 hours</p>
+            </div>
+            <!-- info-block -->
+            <div class="attendant-info-block">
+               <div class="pic-block"> <img src="../images/katty.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+
+                  </ul>
+               </div>
+            </div>
+            <!-- info-block -->
+            <div class="attendant-info-block">
+               <div class="pic-block"> <img src="../images/lana.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+
+                  </ul>
                </div>
             </div>
             <!-- info-block -->
          </div>
          <!-- up-info-container -->
 
-         <h2 class="container-title">attendants info</h2>
-         <input type="text" id="myInput" placeholder='Search for staff by name..'>
-         <div class="down-info-container">
-            <table class="table4 searchTable">
-               <thead>
-                  <tr>
-                     <th>STAFF NAME</th>
-                     <th>MOBILE NUMBER</th>
-                     <th>EMAIL ADDRESS</th>
-                     <th>EMPLOYMENT DATE</th>
-                     <th>TOTAL SALES</th>
-                     <th>OPERATION</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>Sanusi Lamido</td>
-                     <td>09087654534</td>
-                     <td>sanusilamido56@gmail.com</td>
-                     <td>12/09/2018</td>
-                     <td> 23000</td>
-                     <td><button class="delete">Delete</button><button class="edit">Edit</button></td>
-                  </tr>
-                  <tr>
-                     <td>Atiku Alao</td>
-                     <td>07034546534</td>
-                     <td>atikualao@gmail.com</td>
-                     <td>12/09/2017</td>
-                     <td> 13000</td>
-                     <td><button class="delete">Delete</button><button class="edit">Edit</button></td>
-                  </tr>
-                  <tr>
-                     <td>Samuel Johnson</td>
-                     <td>07098231243</td>
-                     <td>daniel@gmail.com</td>
-                     <td>12/09/2018</td>
-                     <td> 3000</td>
-                     <td><button class="delete">Delete</button><button class="edit">Edit</button></td>
-                  </tr>
-                  <tr>
-                     <td>Samson Goddy</td>
-                     <td>09087654534</td>
-                     <td>samsongoddy@gmail.com</td>
-                     <td>12/09/2018</td>
-                     <td> 5000</td>
-                     <td><button class="delete">Delete</button><button class="edit">Edit</button></td>
-                  </tr>
-               </tbody>
-            </table>
+         <h2 class="attendant-container-title all-products-info">all attendants info</h2>
+         <div class="up-info-container attendant-info-container">
+            <div class="attendant-product-block">
+               <div class="pic-block"> <img src="../images/lana.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+                     <li>
+                        <strong>Name:</strong><span>Blue Shoe</span>
+                     </li>
+                     <li>
+                        <strong>E-mail:</strong><span>tammy@gmail.com</span>
+                     </li>
+                     <li>
+                        <strong>Mobile:</strong><span>09086765432</span>
+                     </li>
+                     <li>
+                        <strong>Age:</strong><span>35</span>
+                     </li>
+                     <li>
+                        <strong>Sales:</strong><span>$12</span>
+                     </li>
+                     <li>
+                        <button class="delete">Delete</button><button class="edit">Edit</button>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <!-- info-block -->
+            <div class="attendant-product-block">
+               <div class="pic-block"> <img src="../images/justin.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+                     <li>
+                        <strong>Name:</strong><span>Blue Shoe</span>
+                     </li>
+                     <li>
+                        <strong>E-mail:</strong><span>tammy@gmail.com</span>
+                     </li>
+                     <li>
+                        <strong>Mobile:</strong><span>09086765432</span>
+                     </li>
+                     <li>
+                        <strong>Age:</strong><span>35</span>
+                     </li>
+                     <li>
+                        <strong>Sales:</strong><span>$12</span>
+                     </li>
+                     <li>
+                        <button class="delete">Delete</button><button class="edit">Edit</button>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <!-- info-block -->
+            <div class="attendant-product-block">
+               <div class="pic-block"> <img src="../images/pitbull.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+                     <li>
+                        <strong>Name:</strong><span>Blue Shoe</span>
+                     </li>
+                     <li>
+                        <strong>E-mail:</strong><span>tammy@gmail.com</span>
+                     </li>
+                     <li>
+                        <strong>Mobile:</strong><span>09086765432</span>
+                     </li>
+                     <li>
+                        <strong>Age:</strong><span>35</span>
+                     </li>
+                     <li>
+                        <strong>Sales:</strong><span>$12</span>
+                     </li>
+                     <li>
+                        <button class="delete">Delete</button><button class="edit">Edit</button>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <!-- info-block -->
+            <div class="attendant-product-block">
+               <div class="pic-block"> <img src="../images/rihanna.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+                     <li>
+                        <strong>Name:</strong><span>Blue Shoe</span>
+                     </li>
+                     <li>
+                        <strong>E-mail:</strong><span>tammy@gmail.com</span>
+                     </li>
+                     <li>
+                        <strong>Mobile:</strong><span>09086765432</span>
+                     </li>
+                     <li>
+                        <strong>Age:</strong><span>35</span>
+                     </li>
+                     <li>
+                        <strong>Sales:</strong><span>$12</span>
+                     </li>
+                     <li>
+                        <button class="delete">Delete</button><button class="edit">Edit</button>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <!-- info-block -->
+            <div class="attendant-product-block">
+               <div class="pic-block"> <img src="../images/katty.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+                     <li>
+                        <strong>Name:</strong><span>Blue Shoe</span>
+                     </li>
+                     <li>
+                        <strong>E-mail:</strong><span>tammy@gmail.com</span>
+                     </li>
+                     <li>
+                        <strong>Mobile:</strong><span>09086765432</span>
+                     </li>
+                     <li>
+                        <strong>Age:</strong><span>35</span>
+                     </li>
+                     <li>
+                        <strong>Sales:</strong><span>$12</span>
+                     </li>
+                     <li>
+                        <button class="delete">Delete</button><button class="edit">Edit</button>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <!-- info-block -->
+            <div class="attendant-product-block">
+               <div class="pic-block"> <img src="../images/selena.jpg" alt="product image"></div>
+               <div class="pic-description">
+                  <ul class="description-list">
+                     <li>
+                        <strong>Name:</strong><span>Blue Shoe</span>
+                     </li>
+                     <li>
+                        <strong>E-mail:</strong><span>tammy@gmail.com</span>
+                     </li>
+                     <li>
+                        <strong>Mobile:</strong><span>09086765432</span>
+                     </li>
+                     <li>
+                        <strong>Age:</strong><span>35</span>
+                     </li>
+                     <li>
+                        <strong>Sales:</strong><span>$12</span>
+                     </li>
+                     <li>
+                        <button class="delete">Delete</button><button class="edit">Edit</button>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <!-- info-block -->
          </div>
+         <!-- up-info-container -->
       </div>
       <!-- End of right side -->
    </div>
