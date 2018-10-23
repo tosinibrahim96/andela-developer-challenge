@@ -1,0 +1,570 @@
+/* Defining custom grid system */
+* {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+/* Page styling starts here */
+body {
+	font-family: Montserrat;
+	/* background: #e2e1e059; */
+	background: #fefefe;
+}
+
+.color-primary-0 { color: #FF656D }	/* Main Primary color */
+.color-primary-1 { color: #FFCFD1 }
+.color-primary-2 { color: #FF9298 }
+.color-primary-3 { color: #FF3A44 }
+.color-primary-4 { color: #FF0A16 }
+
+.left {
+	width: 17%;
+}
+
+.right {
+	width: 82%;
+}
+
+.wrapper {
+	display: flex;
+}
+
+#logo {
+	padding: 1em 0em;
+	text-align: center;
+	text-transform: capitalize;
+	color: #fefffe;
+}
+
+/*sidebar*/
+#sidebar {
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background: #FF656D;
+	left: -200px;
+}
+
+#sidebar.active {
+	left: 0px;
+}
+
+#sidebar ul {
+	margin-top: 10px;
+}
+
+#sidebar ul li {
+	color: #fefffe;
+	list-style-type: none;
+	text-transform: capitalize;
+	font-size: 18px;
+	font-weight: 500;
+	padding: 15px 10px;
+	border-bottom: 1px solid #ffffff78;
+}
+
+#sidebar ul li:hover {
+	background: #fefffe;
+	color: #FF0A16;
+}
+
+#sidebar .toggle-btn {
+	position: absolute;
+	left: 210px;
+	top: 0px;
+}
+
+#sidebar .toggle-btn span {
+	display: none;
+}
+/*End of sidebar*/
+
+/*Login page*/
+.login-title{
+	font-size: 38px;
+	color: #ff656c;
+	width: 500px;
+	margin-left: -90px;
+	margin-bottom: 1em;
+	text-transform: capitalize;
+}
+
+.attendant-block {
+	width: 320px;
+	padding: 20px;
+	border-radius: 5px;
+	margin: 110px auto;
+	background: transparent;
+}
+
+.fullname,
+.username,
+.password {
+	width: 100%;
+	height: 42px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+	font-size: 14px;
+	font-family: Montserrat;
+	padding: 0 40px 0 10px;
+	outline: none;
+}
+
+.fullname {
+	background: #fff url("/andela-developer-challenge/images/5.png") 20px top
+		no-repeat;
+	background-size: 16px 80px;
+}
+
+.fullname:focus {
+	background: #fff url("/andela-developer-challenge/images/5.png") 20px bottom
+		no-repeat;
+	background-size: 16px 80px;
+}
+
+.username {
+	background: #fff url("/andela-developer-challenge/images/4.png") 250px top
+		no-repeat;
+	background-size: 16px 80px;
+}
+
+.username:focus {
+	background: #fff url("/andela-developer-challenge/images/4.png") 250px bottom
+		no-repeat;
+	background-size: 16px 80px;
+}
+
+.password {
+	background: #fff url("/andela-developer-challenge/images/3.png") 250px top
+		no-repeat;
+	background-size: 16px 80px;
+}
+
+.password:focus {
+	background: #fff url("/andela-developer-challenge/images/3.png") 250px bottom
+		no-repeat;
+	background-size: 16px 80px;
+}
+
+.attendant-block input:active,
+.attendant-block input:focus {
+	border: 1px solid #ff656c;
+}
+
+.login {
+	width: 100%;
+	height: 40px;
+	background: #ff656c;
+	border-radius: 5px;
+	border: 1px solid #e15960;
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-family: Montserrat;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+}
+
+.login:hover {
+	background: #ff7b81;
+}
+
+.logo {
+	width: 120px;
+	height: 120px;
+	margin: auto;
+	border: 5px solid #fff;
+	border-radius: 50%;
+	margin-bottom: 20px;
+}
+
+.logo img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+#hide {
+	cursor: pointer;
+	color: #ff656c;
+}
+
+#show {
+	cursor: pointer;
+	color: #ff656c;
+}
+
+.not-registered,
+.have-account {
+	text-align: center;
+	font-size: 14px;
+	color: #ff656c;
+	margin-top: 2.5em;
+}
+/*End of Login page*/
+
+/*dashboard info */
+
+.up-info-container,
+.down-info-container {
+	margin-top: 0.5em;
+	display: flex;
+	padding-bottom: 2em;
+	justify-content: space-between;
+	border-bottom: 1px solid #ccc;
+	position: relative;
+}
+
+.container-title {
+	text-align: center;
+	color: #FF3A44;
+	width: 40%;
+	height: 50px;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-weight: 500;
+	margin-top: 2em;
+	padding-top: 0.5em;
+}
+
+.container-title:hover {
+	border:1px solid #FF3A44;
+}
+
+.view-all {
+	position: absolute;
+	right: 5%;
+	top: -25%;
+	width: 15%;
+	height: 50px;
+	text-align: center;
+	background: #bcc9d0;
+	color: #fefefe;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-weight: 500;
+	margin-top: 2em;
+	padding-top: 0.5em;
+}
+
+.add-product {
+	top: -35%;
+	right: 0.5%;
+	width: 20%;
+}
+
+.view-all:hover {
+	background: #214b63;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+h2:nth-child(1) {
+	margin-top: 0.5em;
+}
+
+.info-block {
+	width: 33%;
+	height: 150px;
+	background: #fff;
+	border-radius: 5px;
+	position: relative;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.info-block-header h3 {
+	text-align: center;
+	font-size: 15px;
+	font-weight: 400;
+	color: #fefffe;
+	text-transform: capitalize;
+	padding-top: 0.5em;
+}
+
+.info-block-header h2 {
+	text-align: center;
+	font-size: 17px;
+	font-weight: 500;
+	color: #fefffe;
+	text-transform: capitalize;
+	padding-top: 0.5em;
+}
+
+.info-block-header {
+	position: absolute;
+	width: 40%;
+	height: 40%;
+	padding: 0 0.5em;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.info-block-header:hover {
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.info-block-header1 {
+	background: #e91e6370;
+}
+
+.info-block-header2 {
+	background: #b8d141;
+}
+
+.info-block-header3 {
+	background: #ff450085;
+}
+
+.info-block-header4 {
+	background: #7ccc63;
+}
+
+.info-block-header5 {
+	padding: 0 0.5em;
+	background: #8b9dab;
+}
+
+.info-block-header6 {
+	background: #ff6663;
+}
+
+.info-block-content {
+	position: absolute;
+	right: 5px;
+	text-transform: capitalize;
+	font-size: 18px;
+	text-align: center;
+	color: #214b63;
+}
+.info-block-content p {
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 2em;
+}
+
+#number-of-customers {
+	position: absolute;
+	right: 50px;
+}
+
+.info-block-footer {
+	width: 90%;
+	height: 20px;
+	position: absolute;
+	bottom: 10px;
+	left: 5%;
+	border-top: 1px solid #ccc;
+}
+
+.info-block-footer p {
+	color: #8b9dab;
+	font-size: 12px;
+	padding-top: 0.5em;
+}
+
+.info-block-footer .date {
+	float: right;
+}
+
+/* Responsive table styles */
+table {
+	border-spacing: 1;
+	border-collapse: collapse;
+	background: white;
+	border-radius: 6px;
+	overflow: hidden;
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+table * {
+	position: relative;
+}
+table td,
+table th {
+	padding-left: 8px;
+}
+table thead tr {
+	height: 60px;
+	background: #214b63;
+	color: #fefefe;
+	font-size: 16px;
+}
+table tbody tr {
+	height: 48px;
+	border-bottom: 1px solid #e3f1d5;
+}
+table tbody tr:last-child {
+	border: 0;
+}
+table td,
+table th {
+	text-align: left;
+}
+table td.l,
+table th.l {
+	text-align: right;
+}
+table td.c,
+table th.c {
+	text-align: center;
+}
+table td.r,
+table th.r {
+	text-align: center;
+}
+
+@media screen and (max-width: 35.5em) {
+	table {
+		display: block;
+	}
+	table > *,
+	table tr,
+	table td,
+	table th {
+		display: block;
+	}
+	table thead {
+		display: none;
+	}
+	table tbody tr {
+		height: auto;
+		padding: 8px 0;
+	}
+	table tbody tr td {
+		padding-left: 45%;
+		margin-bottom: 12px;
+	}
+	table tbody tr td:last-child {
+		margin-bottom: 0;
+	}
+	table tbody tr td:before {
+		position: absolute;
+		font-weight: 700;
+		width: 40%;
+		left: 10px;
+		top: 0;
+	}
+	.table1 tbody tr td:nth-child(1):before {
+		content: "PRODUCT NAME";
+	}
+	.table1 tbody tr td:nth-child(2):before {
+		content: "PRODUCT TYPE";
+	}
+	.table1 tbody tr td:nth-child(3):before {
+		content: "QUANTITY";
+	}
+	.table1 tbody tr td:nth-child(4):before {
+		content: "PRICE";
+	}
+	.table1 tbody tr td:nth-child(5):before {
+		content: "ATTENDANT NAME";
+	}
+
+	.table2 tbody tr td:nth-child(1):before {
+		content: "PRODUCT NAME";
+	}
+	.table2 tbody tr td:nth-child(2):before {
+		content: "PRODUCT TYPE";
+	}
+	.table2 tbody tr td:nth-child(3):before {
+		content: "QUANTITY";
+	}
+	.table2 tbody tr td:nth-child(4):before {
+		content: "PRICE";
+	}
+	.table2 tbody tr td:nth-child(5):before {
+		content: "LAST PURCHASE DATE";
+	}
+}
+
+#myInput {
+	background-image: url("/andela-developer-challenge/images/searchicon.png"); /* Add a search icon to input */
+	background-position: 10px 12px; /* Position the search icon */
+	background-repeat: no-repeat; /* Do not repeat the icon image */
+	width: 90%; /* Full-width */
+	font-size: 16px; /* Increase font-size */
+	padding: 12px 20px 12px 40px; /* Add some padding */
+	border: 1px solid #ddd; /* Add a grey border */
+	margin: 0 auto; /* Add some space below the input */
+	margin-top: 1em;
+}
+
+td button {
+	width: 80px;
+	height: 40px;
+	margin: 0.5em;
+	border-radius: 8px;
+	border: none;
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.delete {
+	background: #ff6663;
+	color: #fefefe;
+	cursor: pointer;
+}
+
+.delete:hover {
+	color: #ff6663;
+	background: #fefefe;
+	border: 1px solid #ff6663;
+}
+
+.edit {
+	background: #b8d141;
+	color: #fefefe;
+	cursor: pointer;
+}
+
+.edit:hover {
+	color: #b8d141;
+	background: #fefefe;
+	border: 1px solid #b8d141;
+}
+
+.arrow-container {
+	position: relative;
+}
+
+.arrow-left {
+	position: absolute;
+	left: 190px;
+	top: 20px;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+
+	border-right: 10px solid white;
+}
+
+/* End of responsive table style */
+/* End of dashboard style */
+@media screen and (max-width: 768px) {
+	.attendant-block {
+		width: 70%;
+	}
+	#sidebar.active {
+		left: -200px;
+	}
+	#sidebar.show {
+		left: 0px;
+	}
+
+	#sidebar .toggle-btn span {
+		display: block;
+		width: 30px;
+		height: 5px;
+		background: #e15960;
+		margin: 5px 0px;
+	}
+}
