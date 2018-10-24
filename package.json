@@ -1,0 +1,32 @@
+{
+  "name": "andela-developer-challenge",
+  "version": "1.0.0",
+  "description": "Andela store manager app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tosinibrahim96/andela-developer-challenge.git"
+  },
+  "keywords": [
+    "andela",
+    "store-manager-app"
+  ],
+  "author": "Ibrahim Alausa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tosinibrahim96/andela-developer-challenge/issues"
+  },
+  "homepage": "https://github.com/tosinibrahim96/andela-developer-challenge#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
