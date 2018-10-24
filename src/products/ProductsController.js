@@ -1,4 +1,5 @@
 import db from '../db/products';
+import Joi from 'joi';
 
 class ProductsController {
 
@@ -17,28 +18,66 @@ class ProductsController {
    }
 
    createProduct(req, res) {
-      if (!req.body.title) {
-         return res.status(400).send({
-            success: 'false',
-            message: 'title is required'
-         });
-      } else if (!req.body.description) {
-         return res.status(400).send({
-            success: 'false',
-            message: 'description is required'
-         });
+      // fetch the request data
+      const data = req.body
+
+      // define the validation schema
+      const schema = Joi.object().keys({
+         name: Joi.string().regex(/^([a-zA-Z ]+)$/).required(),
+         category: Joi.string().regex(/^([a-zA-Z]+)$/).required(),
+         quantity: Joi.number().integer().positive().greater(0).required(),
+         size: Joi.number().integer().positive().greater(0),
+         price: Joi.number().positive().greater(0).required(),
+      });
+
+
+
+      // validate the request data against the schema
+      Joi.validate(data, schema, (err, value) => {
+
+         if (err) {
+            // send a 422 error response if validation fails
+            res.status(422).json({
+               status: 'error',
+               message: 'Invalid request data',
+               data: data,
+               error: err.details[0].message
+            });
+         } else {
+
+            //Even when validation is correct, the string may be a bumch of empty characters or "null"
+            //that's what we are checking here
+            if ((req.body.name.match(/^\s*$/) || req.body.name === "null") || (req.body.category.match(/^\s*$/) || req.body.category === "null") || (req.body.quantity.match(/^\s*$/) || req.body.quantity === "null")
+               || (req.body.size.match(/^\s*$/) || req.body.size === "null") || (req.body.price.match(/^\s*$/) || req.body.price === "null")
+            ) {
+               res.status(422).json({
+                  status: 'error',
+                  message: 'Confirm your input is not Empty or Null',
+                  data: req.body,
+               });
+            } else {
+               //If the input is not empty string
+               const product = {
+                  id: db.length + 1,
+                  name: req.body.name,
+                  category: req.body.category,
+                  quantity: req.body.quantity,
+                  size: req.body.size,
+                  price: req.body.price
+               }
+               db.push(product);
+               // send a success response if validation passes
+               res.json({
+                  status: 'success',
+                  message: 'Product created successfully',
+                  data: data
+               });
+            }
+
+
+         }
       }
-      const product = {
-         id: db.length + 1,
-         title: req.body.title,
-         description: req.body.description
-      }
-      db.push(product);
-      return res.status(201).send({
-         success: 'true',
-         message: 'product added successfully',
-         product
-      })
+      );
    }
 
    updateProduct(req, res) {
@@ -59,31 +98,66 @@ class ProductsController {
          });
       }
 
-      if (!req.body.title) {
-         return res.status(400).send({
-            success: 'false',
-            message: 'title is required',
-         });
-      } else if (!req.body.description) {
-         return res.status(400).send({
-            success: 'false',
-            message: 'description is required',
-         });
-      }
+      // fetch the request data
+      const data = req.body
 
-      const updatedproduct = {
-         id: productFound.id,
-         title: req.body.title || productFound.title,
-         description: req.body.description || productFound.description,
-      };
-
-      db.splice(productIndex, 1, updatedproduct);
-
-      return res.status(201).send({
-         success: 'true',
-         message: 'product updated successfully',
-         updatedproduct,
+      // define the validation schema
+      const schema = Joi.object().keys({
+         name: Joi.string().regex(/^([a-zA-Z ]+)$/).required(),
+         category: Joi.string().regex(/^([a-zA-Z]+)$/).required(),
+         quantity: Joi.number().integer().positive().greater(0).required(),
+         size: Joi.number().integer().positive().greater(0),
+         price: Joi.number().positive().greater(0).required(),
       });
+
+
+
+      // validate the request data against the schema
+      Joi.validate(data, schema, (err, value) => {
+
+         if (err) {
+            // send a 422 error response if validation fails
+            res.status(422).json({
+               status: 'error',
+               message: 'Invalid request data',
+               data: data,
+               error: err.details[0].message
+            });
+         } else {
+
+            //Even when validation is correct, the string may be a bumch of empty characters or "null"
+            //that's what we are checking here
+            if ((req.body.name.match(/^\s*$/) || req.body.name === "null") || (req.body.category.match(/^\s*$/) || req.body.category === "null") || (req.body.quantity.match(/^\s*$/) || req.body.quantity === "null")
+               || (req.body.size.match(/^\s*$/) || req.body.size === "null") || (req.body.price.match(/^\s*$/) || req.body.price === "null")
+            ) {
+               res.status(422).json({
+                  status: 'error',
+                  message: 'Confirm your input is not Empty or Null',
+                  data: req.body,
+               });
+            } else {
+               const updatedproduct = {
+                  id: productFound.id,
+                  name: req.body.name || productFound.name,
+                  category: req.body.category || productFound.category,
+                  quantity: req.body.quantity || productFound.quantity,
+                  size: req.body.size || productFound.size,
+                  price: req.body.price || productFound.price
+               };
+
+               db.splice(productIndex, 1, updatedproduct);
+
+               return res.status(201).send({
+                  success: 'true',
+                  message: 'product updated successfully',
+                  updatedproduct,
+               });
+            }
+
+
+         }
+      }
+      );
    }
 
    deleteProduct(req, res) {

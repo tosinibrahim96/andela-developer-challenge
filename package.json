@@ -23,7 +23,8 @@
   "homepage": "https://github.com/tosinibrahim96/andela-developer-challenge#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "joi": "^14.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

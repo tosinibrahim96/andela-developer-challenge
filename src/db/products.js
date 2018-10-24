@@ -1,8 +1,11 @@
 let products = [
    {
       id: 1,
-      title: "lunch",
-      description: "Go for lunc by 2pm"
+      name: "Italian Shoe",
+      category: "Shoe",
+      quantity: 3,
+      size: 43,
+      price: 280
    }
 ];
 
