@@ -552,8 +552,7 @@ table {
 	background: white;
 	border-radius: 6px;
 	overflow: hidden;
-	width: 100%;
-	margin: 0 auto;
+	width: 90%;
 	position: relative;
 }
 
@@ -572,7 +571,7 @@ table th {
 }
 table thead tr {
 	height: 60px;
-	background: #FF3A44;
+	background: #214b63;
 	color: #fefefe;
 	font-size: 16px;
 }
@@ -673,7 +672,6 @@ table th.r {
 	padding: 12px 40px 12px 20px; /* Add some padding */
 	border: 1px solid #ddd; /* Add a grey border */
 	margin: 0 auto; /* Add some space below the input */
-	margin-top: 1em;
 }
 
 #myInput:focus{
