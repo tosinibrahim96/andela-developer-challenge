@@ -47,8 +47,7 @@ class ProductsController {
           data,
           error: err.details[0].message
         });
-      } else if ((typeof req.body.name !== 'string') || (typeof req.body.category !== 'string') || (typeof req.body.price !== 'number')
-        || (typeof req.body.quantity !== 'number') || (typeof req.body.size !== 'number')) {
+      } else if ((typeof req.body.name === 'number') || (typeof req.body.category === 'number')) {
         // send a 422 error response if  string is not entered for name and category
         res.status(422).json({
           status: 'error',
@@ -119,9 +118,7 @@ class ProductsController {
           data,
           error: err.details[0].message
         });
-      } else if ((typeof req.body.name !== 'string') || (typeof req.body.category !== 'string') || (typeof req.body.price !== 'number')
-        || (typeof req.body.quantity !== 'number') || (typeof req.body.size !== 'number')
-      ) {
+      } else if ((typeof req.body.name === 'number') || (typeof req.body.category === 'number')) {
         // send a 422 error response if  string is not entered for name and category
         res.status(422).json({
           status: 'error',
