@@ -12,6 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(productsRoute);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });
+
+export default server;

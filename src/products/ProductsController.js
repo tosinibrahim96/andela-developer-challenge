@@ -13,8 +13,13 @@ class ProductsController {
 
   getProduct(req, res) {
     const product = db.find(p => p.id === parseInt(req.params.id, 10));
-    if (!product) return res.status(404).send('The product with the given ID was not found.');
-    res.send(product);
+    if (!product) {
+      return res.status(404).json({
+        status: 'error',
+        message: 'The product with the given ID was not found.',
+      });
+    }
+    res.status(200).send(product);
   }
 
   createProduct(req, res) {
@@ -42,7 +47,8 @@ class ProductsController {
           data,
           error: err.details[0].message
         });
-      } else if ((typeof req.body.name !== 'string') || (typeof req.body.category !== 'string')) {
+      } else if ((typeof req.body.name !== 'string') || (typeof req.body.category !== 'string') || (typeof req.body.price !== 'number')
+        || (typeof req.body.quantity !== 'number') || (typeof req.body.size !== 'number')) {
         // send a 422 error response if  string is not entered for name and category
         res.status(422).json({
           status: 'error',
@@ -55,16 +61,16 @@ class ProductsController {
           id: db.length + 1,
           name: req.body.name.trim(),
           category: req.body.category.trim(),
-          quantity: req.body.quantity.trim(),
-          size: req.body.size.trim(),
-          price: req.body.price.trim()
+          quantity: req.body.quantity,
+          size: req.body.size,
+          price: req.body.price
         };
         db.push(product);
         // send a success response if validation passes
-        res.json({
+        res.status(201).json({
           status: 'success',
           message: 'Product created successfully',
-          data
+          output: data
         });
       }
     });
@@ -113,11 +119,13 @@ class ProductsController {
           data,
           error: err.details[0].message
         });
-      } else if ((typeof req.body.name !== 'string') || (typeof req.body.category !== 'string')) {
+      } else if ((typeof req.body.name !== 'string') || (typeof req.body.category !== 'string') || (typeof req.body.price !== 'number')
+        || (typeof req.body.quantity !== 'number') || (typeof req.body.size !== 'number')
+      ) {
         // send a 422 error response if  string is not entered for name and category
         res.status(422).json({
           status: 'error',
-          message: 'Invalid data type for name or category',
+          message: 'Invalid data type',
           data
         });
       } else {
@@ -125,9 +133,9 @@ class ProductsController {
           id: productFound.id,
           name: req.body.name.trim() || productFound.name,
           category: req.body.category.trim() || productFound.category,
-          quantity: req.body.quantity.trim() || productFound.quantity,
-          size: req.body.size.trim() || productFound.size,
-          price: req.body.price.trim() || productFound.price
+          quantity: req.body.quantity || productFound.quantity,
+          size: req.body.size || productFound.size,
+          price: req.body.price || productFound.price
         };
 
         db.splice(productIndex, 1, updatedproduct);
@@ -148,7 +156,11 @@ class ProductsController {
 
     const index = db.indexOf(product);
     db.splice(index, 1);
-    res.send(product);
+    return res.status(200).send({
+      success: 'true',
+      message: 'Product Deleted Successfully',
+      data: product
+    });
   }
 }
 
