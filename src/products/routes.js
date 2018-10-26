@@ -6,17 +6,17 @@ const router = express.Router();
 // get all products
 router.get('/api/v1/products/', productController.getAllProducts);
 
-//add a product
+// add a product
 router.post('/api/v1/products/', productController.createProduct);
 
-//get a single product
+// get a single product
 router.get('/api/v1/products/:id', productController.getProduct);
 
-//update a product
+// update a product
 router.put('/api/v1/products/:id', productController.updateProduct);
 
 
-//delete a product
+// delete a product
 router.delete('/api/v1/products/:id', productController.deleteProduct);
 
 module.exports = router;

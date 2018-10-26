@@ -1,9 +1,9 @@
 // server.js
 import express from 'express';
-import productsRoute from './products/routes'
 import bodyParser from 'body-parser';
+import productsRoute from './products/routes';
 
-const app = express()
+const app = express();
 const PORT = process.env.PORT || 3000;
 
 
@@ -13,5 +13,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(productsRoute);
 
 app.listen(PORT, () => {
-   console.log(`server running on port ${PORT}`)
+  console.log(`server running on port ${PORT}`);
 });
