@@ -4,8 +4,9 @@
   "description": "Andela store manager app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir build"
+    "test": "mocha --require babel-register src/tests/*.js --exit",
+    "build": "babel src --out-dir build",
+    "start": "npm run build && nodemon build/server.js"
   },
   "repository": {
     "type": "git",
@@ -23,10 +24,17 @@
   "homepage": "https://github.com/tosinibrahim96/andela-developer-challenge#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "joi": "^14.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0"
   }
 }
