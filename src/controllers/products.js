@@ -6,20 +6,20 @@ class ProductsController {
   getAllProducts(req, res) {
     res.status(200).send({
       success: 'true',
-      message: 'products retrieved successfully',
+      message: 'Products Retrieved Successfully',
       products: db
     });
   }
 
   getProduct(req, res) {
-    const product = db.find(p => p.id === parseInt(req.params.id, 10));
-    if (!product) {
+    const Product = db.find(product => product.id === parseInt(req.params.id, 10));
+    if (!Product) {
       return res.status(404).json({
         status: 'error',
-        message: 'The product with the given ID was not found.',
+        message: 'The Product With the Given ID Was not Found.',
       });
     }
-    res.status(200).send(product);
+    res.status(200).send(Product);
   }
 
   createProduct(req, res) {
@@ -55,7 +55,6 @@ class ProductsController {
           data
         });
       } else {
-        // If the input is not empty string
         const product = {
           id: db.length + 1,
           name: req.body.name.trim(),
@@ -68,7 +67,7 @@ class ProductsController {
         // send a success response if validation passes
         res.status(201).json({
           status: 'success',
-          message: 'Product created successfully',
+          message: 'Product Created Successfully',
           output: data
         });
       }
@@ -90,7 +89,7 @@ class ProductsController {
     if (!productFound) {
       return res.status(404).send({
         success: 'false',
-        message: 'product not found',
+        message: 'Product not Found',
       });
     }
 
@@ -114,7 +113,7 @@ class ProductsController {
         // send a 422 error response if validation fails
         res.status(422).json({
           status: 'error',
-          message: 'Invalid request data',
+          message: 'Invalid request Data',
           data,
           error: err.details[0].message
         });
@@ -122,7 +121,7 @@ class ProductsController {
         // send a 422 error response if  string is not entered for name and category
         res.status(422).json({
           status: 'error',
-          message: 'Invalid data type',
+          message: 'Invalid Data Type',
           data
         });
       } else {
@@ -137,9 +136,9 @@ class ProductsController {
 
         db.splice(productIndex, 1, updatedproduct);
 
-        return res.status(201).send({
+        return res.status(200).send({
           success: 'true',
-          message: 'product updated successfully',
+          message: 'Product Updated Successfully',
           updatedproduct,
         });
       }
@@ -148,15 +147,20 @@ class ProductsController {
 
 
   deleteProduct(req, res) {
-    const product = db.find(p => p.id === parseInt(req.params.id, 10));
-    if (!product) return res.status(404).send('The product with the given ID was not found.');
+    const Product = db.find(product => product.id === parseInt(req.params.id, 10));
+    if (!Product) {
+      return res.status(404).json({
+        status: 'error',
+        message: 'The Product With the Given ID Was not Found.',
+      });
+    }
 
-    const index = db.indexOf(product);
+    const index = db.indexOf(Product);
     db.splice(index, 1);
     return res.status(200).send({
       success: 'true',
       message: 'Product Deleted Successfully',
-      data: product
+      data: Product
     });
   }
 }
