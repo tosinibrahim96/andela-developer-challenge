@@ -4,7 +4,7 @@
   "description": "Andela store manager app",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require babel-register src/tests/*.js --exit",
+    "test": "nyc mocha --require babel-register src/tests/*.js --exit",
     "build": "babel src --out-dir build",
     "start": "npm run build && nodemon build/server.js"
   },
@@ -32,10 +32,12 @@
     "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
+    "coveralls": "^3.0.2",
     "eslint": "^5.7.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^13.1.0"
   }
 }

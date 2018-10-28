@@ -4,7 +4,7 @@ records. This application is meant for use in a single store.
 
 [![Build Status](https://travis-ci.com/tosinibrahim96/andela-developer-challenge.svg?branch=development)](https://travis-ci.com/tosinibrahim96/andela-developer-challenge)
 
-[![Coverage Status](https://coveralls.io/repos/github/tosinibrahim96/andela-developer-challenge/badge.svg?branch=development)](https://coveralls.io/github/tosinibrahim96/andela-developer-challenge?branch=development)
+[![Coverage Status](https://coveralls.io/repos/github/tosinibrahim96/andela-developer-challenge/badge.svg?branch=ch-add-cli-%23161178874)](https://coveralls.io/github/tosinibrahim96/andela-developer-challenge?branch=ch-add-cli-%23161178874)
 
 ## Author 
 Alausa Ibrahim O.
