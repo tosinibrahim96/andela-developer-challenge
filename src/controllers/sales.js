@@ -6,7 +6,7 @@ class SalesController {
   getAllSales(req, res) {
     res.status(200).send({
       success: 'true',
-      message: 'Sales retrieved successfully',
+      message: 'Sales Retrieved Successfully',
       Sales: db
     });
   }
@@ -68,7 +68,7 @@ class SalesController {
         // send a success response if validation passes
         res.status(201).json({
           status: 'success',
-          message: 'Sale created successfully',
+          message: 'Sale Created Successfully',
           output: data
         });
       }
@@ -90,7 +90,7 @@ class SalesController {
     if (!SaleFound) {
       return res.status(404).send({
         success: 'false',
-        message: 'Sale not found',
+        message: 'Sale not Found',
       });
     }
 
@@ -115,7 +115,7 @@ class SalesController {
         // send a 422 error response if validation fails
         res.status(422).json({
           status: 'error',
-          message: 'Invalid request data',
+          message: 'Invalid request Data',
           error: err.details[0].message
         });
       } else if ((typeof req.body.name === 'number') || (typeof req.body.category === 'number')) {
@@ -137,9 +137,9 @@ class SalesController {
 
         db.splice(SaleIndex, 1, updatedSale);
 
-        return res.status(201).send({
+        return res.status(200).send({
           success: 'true',
-          message: 'Sale updated successfully',
+          message: 'Sale Updated Successfully',
           updatedSale,
         });
       }
