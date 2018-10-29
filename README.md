@@ -1,11 +1,11 @@
 # Andela-developer-challenge
 Store Manager is a web application that helps store owners manage sales and product inventory
 records. This application is meant for use in a single store.
-<p align="center">
+<div style="display:flex">
 [![Build Status](https://travis-ci.com/tosinibrahim96/andela-developer-challenge.svg?branch=development)](https://travis-ci.com/tosinibrahim96/andela-developer-challenge)
 
 [![Coverage Status](https://coveralls.io/repos/github/tosinibrahim96/andela-developer-challenge/badge.svg?branch=ch-add-cli-%23161178874)](https://coveralls.io/github/tosinibrahim96/andela-developer-challenge?branch=ch-add-cli-%23161178874)
-</p>
+</div>
 
 ## Author 
 Alausa Ibrahim O.
