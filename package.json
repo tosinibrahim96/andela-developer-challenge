@@ -26,7 +26,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "joi": "^14.0.1"
+    "joi": "^14.0.1",
+    "pg": "^7.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

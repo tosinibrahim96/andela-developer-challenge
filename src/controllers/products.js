@@ -28,8 +28,8 @@ class ProductsController {
 
     // define the validation schema
     const schema = Joi.object().keys({
-      name: Joi.string().required(),
-      category: Joi.string().required(),
+      name: Joi.string().regex(/^[A-Za-z ]+$/).required(),
+      category: Joi.string().regex(/^[A-Za-z ]+$/).required(),
       quantity: Joi.number().integer().positive().greater(0)
         .required(),
       size: Joi.number().integer().positive().greater(0),
@@ -46,13 +46,6 @@ class ProductsController {
           message: 'Invalid request data',
           data,
           error: err.details[0].message
-        });
-      } else if ((typeof req.body.name === 'number') || (typeof req.body.category === 'number')) {
-        // send a 422 error response if  string is not entered for name and category
-        res.status(422).json({
-          status: 'error',
-          message: 'Invalid data type for name or category',
-          data
         });
       } else {
         const product = {
@@ -98,8 +91,8 @@ class ProductsController {
 
     // define the validation schema
     const schema = Joi.object().keys({
-      name: Joi.string().required(),
-      category: Joi.string().required(),
+      name: Joi.string().regex(/^[A-Za-z ]+$/).required(),
+      category: Joi.string().regex(/^[A-Za-z ]+$/).required(),
       quantity: Joi.number().integer().positive().greater(0)
         .required(),
       size: Joi.number().integer().positive().greater(0),
@@ -116,13 +109,6 @@ class ProductsController {
           message: 'Invalid request Data',
           data,
           error: err.details[0].message
-        });
-      } else if ((typeof req.body.name === 'number') || (typeof req.body.category === 'number')) {
-        // send a 422 error response if  string is not entered for name and category
-        res.status(422).json({
-          status: 'error',
-          message: 'Invalid Data Type',
-          data
         });
       } else {
         const updatedproduct = {
