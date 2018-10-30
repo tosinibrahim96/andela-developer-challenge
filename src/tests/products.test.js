@@ -106,7 +106,7 @@ describe('PUT /products/:id', () => {
       .put('/api/v1/products/9')
       .end((err, res) => {
         res.should.have.status(404);
-        expect(res.body.message).to.equal('Product not Found');
+        expect(res.body.message).to.equal('The Product With the Given ID Was not Found.');
         done(err);
       });
   });

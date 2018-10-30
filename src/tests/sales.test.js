@@ -95,7 +95,7 @@ it('should return 404 if an invalid id is passed', (done) => {
     .put('/api/v1/sales/9')
     .end((err, res) => {
       res.should.have.status(404);
-      expect(res.body.message).to.equal('Sale not Found');
+      expect(res.body.message).to.equal('The Sale With the Given ID Was not Found.');
       done(err);
     });
 });
