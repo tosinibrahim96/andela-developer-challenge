@@ -2,7 +2,7 @@
 Store Manager is a web application that helps store owners manage sales and product inventory
 records. This application is meant for use in a single store.
 
-[![Build Status](https://travis-ci.com/tosinibrahim96/andela-developer-challenge.svg?branch=development)](https://travis-ci.com/tosinibrahim96/andela-developer-challenge) [![Coverage Status](https://coveralls.io/repos/github/tosinibrahim96/andela-developer-challenge/badge.svg?branch=development)](https://coveralls.io/github/tosinibrahim96/andela-developer-challenge?branch=development)
+[![Build Status](https://travis-ci.com/tosinibrahim96/andela-developer-challenge.svg?branch=development)](https://travis-ci.com/tosinibrahim96/andela-developer-challenge) [![Coverage Status](https://coveralls.io/repos/github/tosinibrahim96/andela-developer-challenge/badge.svg?branch=development)](https://coveralls.io/github/tosinibrahim96/andela-developer-challenge?branch=development) [![Maintainability](https://api.codeclimate.com/v1/badges/21e3e190e93641443a17/maintainability)](https://codeclimate.com/github/tosinibrahim96/andela-developer-challenge/maintainability)
 
 
 ## Author 
