@@ -1,5 +1,5 @@
 import db from '../models/conn';
-import Helper from './Helper';
+import Helper from '../helper/Helper';
 
 
 class User {

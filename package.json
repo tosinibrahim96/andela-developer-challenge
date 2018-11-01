@@ -4,7 +4,7 @@
   "description": "Andela store manager app",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --require babel-register src/tests/*.js --exit",
+    "test": "nyc mocha --require babel-register --require babel-polyfill src/tests/*.js --exit",
     "build": "babel src --out-dir build",
     "start": "nodemon --exec babel-node ./src/server.js --env",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/tosinibrahim96/andela-developer-challenge#readme",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "dotenv": "^6.1.0",
@@ -42,7 +43,7 @@
     "chai-http": "^4.2.0",
     "coveralls": "^3.0.2",
     "eslint": "^5.7.0",
-    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-airbn-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0"

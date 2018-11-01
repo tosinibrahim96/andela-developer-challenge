@@ -2,9 +2,6 @@ import db from '../models/conn';
 import Helper from '../helper/Helper';
 
 
-/**
-    * Create A Product
-    */
 class Product {
   /**
   * Get all Categories
