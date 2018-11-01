@@ -19,7 +19,7 @@ app.use(productsRoute);
 app.use(salesRoute);
 app.use(usersRoute);
 app.use(categoriesRoute);
-
+app.get('/', (req, res) => res.send('Welcome to shoppy!'))
 const server = app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });

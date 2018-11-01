@@ -46,7 +46,9 @@ app.use(_products2.default);
 app.use(_sales2.default);
 app.use(_users2.default);
 app.use(_categories2.default);
-
+app.get('/', function (req, res) {
+  return res.send('Welcome to shoppy!');
+});
 var server = app.listen(PORT, function () {
   console.log('server running on port ' + PORT);
 });
