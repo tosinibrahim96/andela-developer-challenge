@@ -1,136 +1,137 @@
-import Joi from 'joi';
-import db from '../db/products';
+import db from '../models/conn';
+import Helper from '../helper/Helper';
 
-const validateProduct = (data) => {
-  // define the validation schema
-  const schema = Joi.object().keys({
-    name: Joi.string().regex(/^[A-Za-z ]+$/).required(),
-    category: Joi.string().regex(/^[A-Za-z ]+$/).required(),
-    quantity: Joi.number().integer().positive().greater(0)
-      .required(),
-    size: Joi.number().integer().positive().greater(0),
-    price: Joi.number().positive().greater(0).required(),
-  });
 
-  return Joi.validate(data, schema);
-};
-
-const productNotFound = (res) => {
-  res.status(404).json({
-    status: 'error',
-    message: 'The Product With the Given ID Was not Found.',
-  });
-};
-
-const invalidDataMsg = (res, error) => {
-  // send a 422 error response if validation fails
-  res.status(422).json({
-    status: 'error',
-    message: 'Invalid request data',
-    error: error.details[0].message
-  });
-};
-
-class ProductsController {
-  getAllProducts(req, res) {
-    res.status(200).send({
-      success: 'true',
-      message: 'Products Retrieved Successfully',
-      products: db
-    });
-  }
-
-  getProduct(req, res) {
-    const Product = db.find(product => product.id === parseInt(req.params.id, 10));
-    if (!Product) {
-      return productNotFound(res);
+/**
+    * Create A Product
+    */
+class Product {
+  /**
+  * Get all Categories
+  */
+  static async getAllProducts(req, res) {
+    const findAllQuery = 'select * FROM products';
+    try {
+      const { rows } = await db.query(findAllQuery);
+      return res.status(200).send({ rows });
+    } catch (error) {
+      return res.status(400).send({ error });
     }
-    res.status(200).send({
-      success: 'true',
-      message: 'Product Retrieved Successfully',
-      Product
-    });
   }
 
-  createProduct(req, res) {
-    // fetch the request data
-    const data = req.body;
-    const result = validateProduct(data);
 
-
-    if (result.error) {
-      return invalidDataMsg(res, result.error);
-    }
-    const product = {
-      id: db.length + 1,
-      name: data.name.trim(),
-      category: data.category.trim(),
-      quantity: req.body.quantity,
-      size: req.body.size,
-      price: req.body.price
-    };
-    db.push(product);
-    // send a success response if validation passes
-    res.status(201).json({
-      status: 'success',
-      message: 'Product Created Successfully',
-      output: data
-    });
-  }
-
-  updateProduct(req, res) {
-    const id = parseInt(req.params.id, 10);
-    let productFound;
-    let productIndex;
-    db.map((product, index) => {
-      if (product.id === id) {
-        productFound = product;
-        productIndex = index;
+  /**
+   * Get A Product
+   */
+  static async getProduct(req, res) {
+    const text = 'SELECT * FROM products WHERE id = $1';
+    try {
+      const { rows } = await db.query(text, [req.params.id]);
+      if (!rows[0]) {
+        return Helper.productNotFound(res);
       }
-      return false;
-    });
-
-    if (!productFound) {
-      return productNotFound(res);
+      return res.status(200).send(rows[0]);
+    } catch (error) {
+      return res.status(400).send(error);
     }
+  }
 
+  static async createProduct(req, res) {
+    const userRole = req.user.role;
     // fetch the request data
     const data = req.body;
-    const result = validateProduct(data);
+    const result = Helper.validateProduct(data);
+    if (userRole === 'admin') {
+      if (result.error) {
+        return Helper.invalidDataMsg(res, result.error);
+      }
+      const checkCategory = 'SELECT * FROM categories WHERE id =$1';
+      const catValues = [
+        parseInt(req.body.category_id, 10)
+      ];
+      const createQuery = 'INSERT INTO products (name,cat_id) VALUES ($1,$2) returning *';
+      const values = [
+        req.body.name.trim(),
+        parseInt(req.body.category_id, 10)
+      ];
+      try {
+        const { rowCount } = await db.query(checkCategory, catValues);
+        if (rowCount <= 0) {
+          res.status(400).send({ message: 'The category does not exist' });
+          return;
+        }
+        const { rows } = await db.query(createQuery, values);
+        return res.status(201).send({ rows });
+      } catch (error) {
+        console.log(res.status(400).send(error));
+      }
+    } return res.status(401).send({ Message: 'You are not allowed to view this page' });
+  }
 
-    if (result.error) {
-      return invalidDataMsg(res, result.error);
-    }
-    const updatedproduct = {
-      id: productFound.id,
-      name: req.body.name.trim() || productFound.name,
-      category: req.body.category.trim() || productFound.category,
-      quantity: req.body.quantity || productFound.quantity,
-      size: req.body.size || productFound.size,
-      price: req.body.price || productFound.price
-    };
-    db.splice(productIndex, 1, updatedproduct);
-    return res.status(200).send({
-      success: 'true',
-      message: 'Product Updated Successfully',
-      updatedproduct,
-    });
+  static async updateProduct(req, res) {
+    const userRole = req.user.role;
+    // fetch the request data
+    const data = req.body;
+    const result = Helper.validateProduct(data);
+    if (userRole === 'admin') {
+      if (result.error) {
+        return Helper.invalidDataMsg(res, result.error);
+      }
+      const findProduct = 'SELECT * FROM products WHERE id=$1 AND cat_id=$2';
+      const updateProduct = `UPDATE products
+      SET name=$1,cat_id=$2
+      WHERE id=$3`;
+      try {
+        const { rows } = await db.query(findProduct,
+          [req.params.id, parseInt(req.body.category_id, 10)]);
+        if (!rows[0]) {
+          res.status(400).send({ message: 'The Product not in this category' });
+          return;
+        }
+        const values = [
+          req.body.name.trim() || rows[0].name,
+          parseInt(req.body.category_id, 10) || rows[0].cat_id,
+          req.params.id,
+        ];
+        await db.query(updateProduct, values);
+        return res.status(200).send({ Message: 'Product update successful' });
+      } catch (err) {
+        return res.status(400).send(err);
+      }
+    } return res.status(401).send({ Message: 'You are not allowed to view this page' });
   }
 
 
-  deleteProduct(req, res) {
-    const Product = db.find(product => product.id === parseInt(req.params.id, 10));
-    if (!Product) {
-      return productNotFound(res);
-    }
-    const index = db.indexOf(Product);
-    db.splice(index, 1);
-    return res.status(200).send({
-      success: 'true',
-      message: 'Product Deleted Successfully',
-    });
+  static async deleteProduct(req, res) {
+    const userRole = req.user.role;
+    // fetch the request data
+    const data = req.body;
+    const result = Helper.validateProduct(data);
+    if (userRole === 'admin') {
+      if (result.error) {
+        return Helper.invalidDataMsg(res, result.error);
+      }
+      const findProduct = 'SELECT * FROM products WHERE id=$1 AND cat_id=$2';
+      const deleteProduct = `DELETE FROM products
+      WHERE id=$1`;
+      try {
+        const { rows } = await db.query(findProduct,
+          [req.params.id, parseInt(req.body.category_id, 10)]);
+        if (!rows[0]) {
+          res.status(400).send({ message: 'The Product not in this category' });
+          return;
+        }
+        const values = [
+          req.params.id,
+        ];
+        await db.query(deleteProduct, values);
+        return res.status(200).send({ Message: 'Product deleted successfuly' });
+      } catch (err) {
+        return res.status(400).send(err);
+      }
+    } return res.status(401).send({ Message: 'You are not allowed to view this page' });
   }
 }
 
-const productController = new ProductsController();
-export default productController;
+
+export default Product;

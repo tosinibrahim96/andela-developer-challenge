@@ -33,15 +33,15 @@ const invalidDataMsg = (res, error) => {
 };
 
 class SalesController {
-  getAllSales(req, res) {
-    res.status(200).send({
+  static getAllSales(req, res) {
+    return res.status(200).send({
       success: 'true',
       message: 'Sales Retrieved Successfully',
       Sales: db
     });
   }
 
-  getSale(req, res) {
+  static getSale(req, res) {
     const Sale = db.find(sale => sale.id === parseInt(req.params.id, 10));
     if (!Sale) {
       return res.status(404).json({
@@ -52,7 +52,7 @@ class SalesController {
     res.status(200).send(Sale);
   }
 
-  createSales(req, res) {
+  static createSales(req, res) {
     // fetch the request data
     const data = req.body;
     const result = validateSale(data);
@@ -79,7 +79,7 @@ class SalesController {
     });
   }
 
-  updateSales(req, res) {
+  static updateSales(req, res) {
     const id = parseInt(req.params.id, 10);
     let SaleFound;
     let SaleIndex;
@@ -123,7 +123,7 @@ class SalesController {
   }
 
 
-  deleteSale(req, res) {
+  static deleteSale(req, res) {
     const Sale = db.find(sale => sale.id === parseInt(req.params.id, 10));
     if (!Sale) {
       return res.status(404).json({
@@ -141,5 +141,5 @@ class SalesController {
   }
 }
 
-const salesController = new SalesController();
-export default salesController;
+
+export default SalesController;
