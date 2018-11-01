@@ -21,6 +21,9 @@ const productTable = `CREATE TABLE IF NOT EXISTS
     id SERIAL PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     cat_id INTEGER NOT NULL,
+    price INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    description VARCHAR(40) NOT NULL,
     FOREIGN KEY(cat_id) REFERENCES categories(id) ON DELETE CASCADE
   );`;
 
@@ -34,8 +37,22 @@ const categoryTable = `CREATE TABLE IF NOT EXISTS
         name VARCHAR(40) NOT NULL
       );`;
 
+
+/**
+* Create Sales Table
+*/
+const salesTable = `CREATE TABLE IF NOT EXISTS
+  sales(
+    id SERIAL PRIMARY KEY NOT NULL,
+    product_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE  
+    );`;
+
+
 const addAdmin = ` INSERT INTO users(email, password,role) 
 VALUES ('admin@mail.com', '${pword}' ,'admin');`;
 
-const tables = `${usersTable} ${addAdmin} ${categoryTable}  ${productTable}`;
+const tables = `${usersTable} ${addAdmin} ${categoryTable}  ${productTable} ${salesTable}`;
 export default tables;

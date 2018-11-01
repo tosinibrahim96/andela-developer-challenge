@@ -8,12 +8,16 @@ class User {
     */
   static async create(req, res) {
     const userRole = req.user.role;
+    const email = req.body.email;
+    const emailObject = { email: email };
+    const answer = Helper.isValidEmail(emailObject);
     if (userRole === 'admin') {
       if (!req.body.email || !req.body.password) {
         return res.status(400).send({ message: 'Some values are missing' });
       }
-      if (!Helper.isValidEmail(req.body.email)) {
-        return res.status(400).send({ message: 'Please enter a valid email address' });
+      if (answer.error) {
+        res.status(400).send({ message: 'Please enter a valid email address' });
+        return;
       }
       const hashPassword = Helper.hashPassword(req.body.password);
 
@@ -33,7 +37,7 @@ class User {
         console.log(res.status(400).send('error'));
       }
     }
-    return res.status(401).send({ Message: 'You are not allowed to view this page' });
+    return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 
   /**
@@ -45,23 +49,27 @@ class User {
       const findAllQuery = 'select * FROM users';
       try {
         const { rows } = await db.query(findAllQuery);
-        return res.status(200).send({ rows });
+        return res.status(201).send({ rows });
       } catch (error) {
         return res.status(400).send({ error });
       }
     }
-    return res.status(401).send({ Message: 'You are not allowed to view this page' });
+    return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 
   /**
    * Login
    */
   static async login(req, res, next) {
+
+    const email = req.body.email;
+    const emailObject = { email: email };
+    const answer = Helper.isValidEmail(emailObject);
     if (!req.body.email || !req.body.password) {
       res.status(400).send({ message: 'Some values are missing' });
       return;
     }
-    if (!Helper.isValidEmail(req.body.email)) {
+    if (answer.error) {
       res.status(400).send({ message: 'Please enter a valid email address' });
       return;
     }

@@ -23,7 +23,7 @@ class Category {
         console.log(res.status(400).send(error));
       }
     }
-    return res.status(401).send({ Message: 'You are not allowed to view this page' });
+    return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 
   /**
@@ -40,7 +40,7 @@ class Category {
         return res.status(400).send({ error });
       }
     }
-    return res.status(401).send({ Message: 'You are not allowed to view this page' });
+    return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 }
 

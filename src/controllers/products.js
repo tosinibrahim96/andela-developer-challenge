@@ -46,10 +46,13 @@ class Product {
       const catValues = [
         parseInt(req.body.category_id, 10)
       ];
-      const createQuery = 'INSERT INTO products (name,cat_id) VALUES ($1,$2) returning *';
+      const createQuery = 'INSERT INTO products (name,cat_id,price,quantity,description) VALUES ($1,$2,$3,$4,$5) returning *';
       const values = [
         req.body.name.trim(),
-        parseInt(req.body.category_id, 10)
+        parseInt(req.body.category_id, 10),
+        req.body.price,
+        req.body.quantity,
+        req.body.description.trim()
       ];
       try {
         const { rowCount } = await db.query(checkCategory, catValues);
@@ -60,9 +63,9 @@ class Product {
         const { rows } = await db.query(createQuery, values);
         return res.status(201).send({ rows });
       } catch (error) {
-        console.log(res.status(400).send(error));
+        console.log(res.status(422).send(error));
       }
-    } return res.status(401).send({ Message: 'You are not allowed to view this page' });
+    } return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 
   static async updateProduct(req, res) {
@@ -76,8 +79,8 @@ class Product {
       }
       const findProduct = 'SELECT * FROM products WHERE id=$1 AND cat_id=$2';
       const updateProduct = `UPDATE products
-      SET name=$1,cat_id=$2
-      WHERE id=$3`;
+      SET name=$1,cat_id=$2,price=$3,quantity=$4,description=$5
+      WHERE id=$6`;
       try {
         const { rows } = await db.query(findProduct,
           [req.params.id, parseInt(req.body.category_id, 10)]);
@@ -88,14 +91,17 @@ class Product {
         const values = [
           req.body.name.trim() || rows[0].name,
           parseInt(req.body.category_id, 10) || rows[0].cat_id,
-          req.params.id,
+          req.body.price || rows[0].price,
+          req.body.quantity || rows[0].quantity,
+          req.body.description.trim() || rows[0].description,
+          req.params.id
         ];
         await db.query(updateProduct, values);
         return res.status(200).send({ Message: 'Product update successful' });
       } catch (err) {
         return res.status(400).send(err);
       }
-    } return res.status(401).send({ Message: 'You are not allowed to view this page' });
+    } return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 
 
@@ -126,7 +132,7 @@ class Product {
       } catch (err) {
         return res.status(400).send(err);
       }
-    } return res.status(401).send({ Message: 'You are not allowed to view this page' });
+    } return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 }
 
