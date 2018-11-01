@@ -5,7 +5,9 @@ import productsRoute from './routes/products';
 import salesRoute from './routes/sales';
 import usersRoute from './routes/users';
 import categoriesRoute from './routes/categories';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 

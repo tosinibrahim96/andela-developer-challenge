@@ -8,6 +8,7 @@
     "build": "babel src --out-dir build",
     "start": "nodemon --exec babel-node ./src/server.js --env",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "dist": "babel src -d dist",
     "db": "babel-node ./src/models/conn"
   },
   "repository": {
