@@ -36,8 +36,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _dotenv2.default.config(); // server.js
 
-var app = (0, _express2.default)();
-var PORT = process.env.PORT || 3000;
+const app = (0, _express2.default)();
+const PORT = process.env.PORT || 3000;
 
 // Parse incoming requests data
 app.use(_bodyParser2.default.json());
@@ -46,11 +46,9 @@ app.use(_products2.default);
 app.use(_sales2.default);
 app.use(_users2.default);
 app.use(_categories2.default);
-app.get('/', function (req, res) {
-  return res.send('Welcome to shoppy!');
-});
-var server = app.listen(PORT, function () {
-  console.log('server running on port ' + PORT);
+app.get('/', (req, res) => res.send('Welcome to shoppy!'));
+const server = app.listen(PORT, () => {
+  console.log(`server running on port ${PORT}`);
 });
 
 exports.default = server;

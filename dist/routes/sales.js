@@ -10,7 +10,7 @@ var _Sales2 = _interopRequireDefault(_Sales);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var router = _express2.default.Router();
+const router = _express2.default.Router();
 
 // get all sales
 router.get('/api/v1/sales/', _Sales2.default.getAllSales);
