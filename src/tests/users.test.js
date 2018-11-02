@@ -32,20 +32,6 @@ describe('POST /auth', () => {
           .end((err, res) => {
             res.should.have.status(201);
           });
-        done(err);
-      });
-  });
-});
-
-
-describe('GET /users', () => {
-  it('should give a user access to system and view all users', (done) => {
-    chai.request(server)
-      .post('/api/v1/auth/login')
-      .send(adminCredentials)
-      .end((err, res) => {
-        res.should.have.status(200);
-        expect(res.body.message).to.equal('Login Successful');
         chai.request(server)
           .get('/api/v1/users')
           .set("token", res.body.token)
@@ -56,3 +42,4 @@ describe('GET /users', () => {
       });
   });
 });
+
