@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _joi = require('joi');
 
 var _joi2 = _interopRequireDefault(_joi);
@@ -14,9 +16,11 @@ var _sales2 = _interopRequireDefault(_sales);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const validateSale = data => {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var validateSale = function validateSale(data) {
   // define the validation schema
-  const schema = _joi2.default.object().keys({
+  var schema = _joi2.default.object().keys({
     name: _joi2.default.string().regex(/^[A-Za-z ]+$/).required(),
     category: _joi2.default.string().regex(/^[A-Za-z ]+$/).required(),
     quantity: _joi2.default.number().integer().positive().greater(0).required(),
@@ -28,14 +32,14 @@ const validateSale = data => {
   return _joi2.default.validate(data, schema);
 };
 
-const saleNotFound = res => {
+var saleNotFound = function saleNotFound(res) {
   res.status(404).json({
     status: 'error',
     message: 'The Sale With the Given ID Was not Found.'
   });
 };
 
-const invalidDataMsg = (res, error) => {
+var invalidDataMsg = function invalidDataMsg(res, error) {
   // send a 422 error response if validation fails
   res.status(422).json({
     status: 'error',
@@ -44,110 +48,127 @@ const invalidDataMsg = (res, error) => {
   });
 };
 
-class SalesController {
-  static getAllSales(req, res) {
-    return res.status(200).send({
-      success: 'true',
-      message: 'Sales Retrieved Successfully',
-      Sales: _sales2.default
-    });
+var SalesController = function () {
+  function SalesController() {
+    _classCallCheck(this, SalesController);
   }
 
-  static getSale(req, res) {
-    const Sale = _sales2.default.find(sale => sale.id === parseInt(req.params.id, 10));
-    if (!Sale) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'The Sale with the given ID was not found.'
+  _createClass(SalesController, null, [{
+    key: 'getAllSales',
+    value: function getAllSales(req, res) {
+      return res.status(200).send({
+        success: 'true',
+        message: 'Sales Retrieved Successfully',
+        Sales: _sales2.default
       });
     }
-    res.status(200).send(Sale);
-  }
-
-  static createSales(req, res) {
-    // fetch the request data
-    const data = req.body;
-    const result = validateSale(data);
-
-    if (result.error) {
-      return invalidDataMsg(res, result.error);
-    }
-    const sale = {
-      id: _sales2.default.length + 1,
-      name: data.name.trim(),
-      category: data.category.trim(),
-      quantity: req.body.quantity,
-      size: req.body.size,
-      price: req.body.price,
-      userId: req.body.userId
-    };
-    _sales2.default.push(sale);
-    // send a success response if validation passes
-    res.status(201).json({
-      status: 'success',
-      message: 'Sale Created Successfully',
-      output: data
-    });
-  }
-
-  static updateSales(req, res) {
-    const id = parseInt(req.params.id, 10);
-    let SaleFound;
-    let SaleIndex;
-    _sales2.default.map((Sale, index) => {
-      if (Sale.id === id) {
-        SaleFound = Sale;
-        SaleIndex = index;
+  }, {
+    key: 'getSale',
+    value: function getSale(req, res) {
+      var Sale = _sales2.default.find(function (sale) {
+        return sale.id === parseInt(req.params.id, 10);
+      });
+      if (!Sale) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'The Sale with the given ID was not found.'
+        });
       }
-      return false;
-    });
-
-    if (!SaleFound) {
-      return saleNotFound(res);
+      res.status(200).send(Sale);
     }
+  }, {
+    key: 'createSales',
+    value: function createSales(req, res) {
+      // fetch the request data
+      var data = req.body;
+      var result = validateSale(data);
 
-    // fetch the request data
-    const data = req.body;
-    const result = validateSale(data);
-
-    if (result.error) {
-      return invalidDataMsg(res, result.error);
-    }
-    const updatedSale = {
-      id: SaleFound.id,
-      name: req.body.name.trim() || SaleFound.name,
-      category: req.body.category.trim() || SaleFound.category,
-      quantity: req.body.quantity || SaleFound.quantity,
-      size: req.body.size || SaleFound.size,
-      price: req.body.price || SaleFound.price,
-      userId: req.body.userId || SaleFound.userId
-    };
-
-    _sales2.default.splice(SaleIndex, 1, updatedSale);
-
-    return res.status(200).send({
-      success: 'true',
-      message: 'Sale Updated Successfully',
-      updatedSale
-    });
-  }
-
-  static deleteSale(req, res) {
-    const Sale = _sales2.default.find(sale => sale.id === parseInt(req.params.id, 10));
-    if (!Sale) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'The Sale with the given ID was not found.'
+      if (result.error) {
+        return invalidDataMsg(res, result.error);
+      }
+      var sale = {
+        id: _sales2.default.length + 1,
+        name: data.name.trim(),
+        category: data.category.trim(),
+        quantity: req.body.quantity,
+        size: req.body.size,
+        price: req.body.price,
+        userId: req.body.userId
+      };
+      _sales2.default.push(sale);
+      // send a success response if validation passes
+      res.status(201).json({
+        status: 'success',
+        message: 'Sale Created Successfully',
+        output: data
       });
     }
+  }, {
+    key: 'updateSales',
+    value: function updateSales(req, res) {
+      var id = parseInt(req.params.id, 10);
+      var SaleFound = void 0;
+      var SaleIndex = void 0;
+      _sales2.default.map(function (Sale, index) {
+        if (Sale.id === id) {
+          SaleFound = Sale;
+          SaleIndex = index;
+        }
+        return false;
+      });
 
-    const index = _sales2.default.indexOf(Sale);
-    _sales2.default.splice(index, 1);
-    return res.status(200).send({
-      success: 'true',
-      message: 'Sale Deleted Successfully'
-    });
-  }
-}
+      if (!SaleFound) {
+        return saleNotFound(res);
+      }
+
+      // fetch the request data
+      var data = req.body;
+      var result = validateSale(data);
+
+      if (result.error) {
+        return invalidDataMsg(res, result.error);
+      }
+      var updatedSale = {
+        id: SaleFound.id,
+        name: req.body.name.trim() || SaleFound.name,
+        category: req.body.category.trim() || SaleFound.category,
+        quantity: req.body.quantity || SaleFound.quantity,
+        size: req.body.size || SaleFound.size,
+        price: req.body.price || SaleFound.price,
+        userId: req.body.userId || SaleFound.userId
+      };
+
+      _sales2.default.splice(SaleIndex, 1, updatedSale);
+
+      return res.status(200).send({
+        success: 'true',
+        message: 'Sale Updated Successfully',
+        updatedSale: updatedSale
+      });
+    }
+  }, {
+    key: 'deleteSale',
+    value: function deleteSale(req, res) {
+      var Sale = _sales2.default.find(function (sale) {
+        return sale.id === parseInt(req.params.id, 10);
+      });
+      if (!Sale) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'The Sale with the given ID was not found.'
+        });
+      }
+
+      var index = _sales2.default.indexOf(Sale);
+      _sales2.default.splice(index, 1);
+      return res.status(200).send({
+        success: 'true',
+        message: 'Sale Deleted Successfully'
+      });
+    }
+  }]);
+
+  return SalesController;
+}();
 
 exports.default = SalesController;

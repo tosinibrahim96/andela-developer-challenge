@@ -46,8 +46,8 @@ class Helper {
     const schema = Joi.object().keys({
       name: Joi.string().required(),
       category_id: Joi.number().required(),
-      price: Joi.number().min().required(),
-      quantity: Joi.number().min().required(),
+      price: Joi.number().min(1).required(),
+      quantity: Joi.number().min(1).required(),
       description: Joi.string().required()
     });
 

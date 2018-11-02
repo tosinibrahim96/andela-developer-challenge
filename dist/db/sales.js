@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-const sales = [{
+var sales = [{
   id: 1,
   name: 'Italian Shoe',
   category: 'Shoe',

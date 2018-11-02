@@ -14,27 +14,28 @@ var _server2 = _interopRequireDefault(_server);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const adminCredentials = {
+var adminCredentials = {
   email: 'admin@mail.com',
   password: '111111'
 };
 
-const categeoryDetails = {
+var categeoryDetails = {
   name: 'categoryname'
 };
 
 _chai2.default.use(_chaiHttp2.default);
-const should = _chai2.default.should();
-const { expect } = _chai2.default;
-describe('POST /auth', () => {
-  it('should give a user access to system and create category', done => {
-    _chai2.default.request(_server2.default).post('/api/v1/auth/login').send(adminCredentials).end((err, res) => {
+var should = _chai2.default.should();
+var expect = _chai2.default.expect;
+
+describe('POST /auth', function () {
+  it('should give a user access to system and create category', function (done) {
+    _chai2.default.request(_server2.default).post('/api/v1/auth/login').send(adminCredentials).end(function (err, res) {
       res.should.have.status(200);
       expect(res.body.message).to.equal('Login Successful');
-      _chai2.default.request(_server2.default).get('/api/v1/categories').set("token", res.body.token).end((err, res) => {
+      _chai2.default.request(_server2.default).get('/api/v1/categories').set("token", res.body.token).end(function (err, res) {
         res.should.have.status(200);
       });
-      _chai2.default.request(_server2.default).post('/api/v1/categories').send(categeoryDetails).set("token", res.body.token).end((err, res) => {
+      _chai2.default.request(_server2.default).post('/api/v1/categories').send(categeoryDetails).set("token", res.body.token).end(function (err, res) {
         res.should.have.status(201);
       });
       done(err);

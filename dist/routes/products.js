@@ -14,7 +14,7 @@ var _Auth2 = _interopRequireDefault(_Auth);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const router = _express2.default.Router();
+var router = _express2.default.Router();
 
 // get all products
 router.get('/api/v1/products/', _Products2.default.getAllProducts);
