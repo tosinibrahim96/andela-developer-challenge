@@ -1,7 +1,9 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Joi from 'joi';
+import dotenv from 'dotenv';
 
+dotenv.config();
 class Helper {
   /**
    * Hash Password Method
@@ -21,7 +23,11 @@ class Helper {
    * isValidEmail helper method
    */
   static isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
+    const schema = Joi.object().keys({
+      email: Joi.string().email().required(),
+    });
+
+    return Joi.validate(email, schema);
   }
 
   /**
@@ -40,7 +46,12 @@ class Helper {
     const schema = Joi.object().keys({
       name: Joi.string().required(),
       category_id: Joi.number().required(),
+      price: Joi.number().min(1).required(),
+      quantity: Joi.number().min(1).required(),
+      description: Joi.string().required()
     });
+
+
 
     return Joi.validate(data, schema);
   }

@@ -1,5 +1,14 @@
-import db from '../models/conn';
+'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _conn = require('../models/conn');
+
+var _conn2 = _interopRequireDefault(_conn);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class Category {
   /**
@@ -13,11 +22,9 @@ class Category {
       }
 
       const createQuery = 'INSERT INTO categories (name) VALUES ($1) returning *';
-      const values = [
-        req.body.name,
-      ];
+      const values = [req.body.name];
       try {
-        const { rows } = await db.query(createQuery, values);
+        const { rows } = await _conn2.default.query(createQuery, values);
         return res.status(201).send({ rows });
       } catch (error) {
         console.log(res.status(400).send(error));
@@ -34,7 +41,7 @@ class Category {
     if (userRole === 'admin') {
       const findAllQuery = 'select * FROM categories';
       try {
-        const { rows } = await db.query(findAllQuery);
+        const { rows } = await _conn2.default.query(findAllQuery);
         return res.status(200).send({ rows });
       } catch (error) {
         return res.status(400).send({ error });
@@ -44,5 +51,4 @@ class Category {
   }
 }
 
-
-export default Category;
+exports.default = Category;

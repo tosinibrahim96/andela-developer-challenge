@@ -5,7 +5,9 @@ import productsRoute from './routes/products';
 import salesRoute from './routes/sales';
 import usersRoute from './routes/users';
 import categoriesRoute from './routes/categories';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -17,7 +19,7 @@ app.use(productsRoute);
 app.use(salesRoute);
 app.use(usersRoute);
 app.use(categoriesRoute);
-
+app.get('/', (req, res) => res.send('Welcome to shoppy!'))
 const server = app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });
