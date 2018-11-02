@@ -18,14 +18,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _dotenv2.default.config();
 
-var pool = new _pg.Pool({
+const pool = new _pg.Pool({
   connectionString: process.env.DATABASE_URL
 });
 
-pool.connect().then(function (client) {
-  client.query(_schema2.default).then(function (res) {
+pool.connect().then(client => {
+  client.query(_schema2.default).then(res => {
     console.log(res);
-  }).catch(function (err) {
+  }).catch(err => {
     client.release();if (err.routine === '_bt_check_unique') {
       console.log({ message: 'User with that EMAIL already exist' });
     }
@@ -33,7 +33,5 @@ pool.connect().then(function (client) {
 });
 
 exports.default = {
-  query: function query(text, params) {
-    return pool.query(text, params);
-  }
+  query: (text, params) => pool.query(text, params)
 };
