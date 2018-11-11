@@ -28,7 +28,64 @@ body {
 
 .right {
 	width: 80%;
-	margin: 0 1% 0 5%;
+  margin: 0 1% 0 5%;
+  position: relative;
+}
+
+.incr{
+	position: fixed;
+	bottom: 2%;
+	right: 2%;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: #214b63;
+	color: #fefefe;
+	font-size: 25px;
+	padding-top: 0.5em;
+	z-index: 4;
+	text-align: center;
+}
+
+.tabs {
+	width: 80%;
+  margin: 2% 1% 2% 5%; 
+  border: 0.3px solid #214b63;
+  position: relative;
+}
+
+.circle{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #214b63;
+  position: absolute;
+  cursor: pointer;
+}
+
+.circle:hover{
+  background: #214b63;
+  border: none;
+  cursor: pointer;
+}
+
+.present{
+   background: #214b63;
+  border: none;
+  cursor: pointer;
+}
+
+.circle1{
+top: -10px;
+  left: 10%;
+  cursor: pointer;
+}
+
+.circle2{
+top: -10px;
+  right: 10%;
+  cursor: pointer;
 }
 
 .admin-right{
@@ -36,7 +93,23 @@ body {
 }
 
 .wrapper {
-	display: flex;
+  display: flex;
+  position: relative;
+}
+
+.upBlock{
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+}
+
+
+.downBlock{
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
 }
 
 .login-form{
@@ -174,7 +247,7 @@ body {
 	border: 1px solid #e15960;
 	color: #fff;
 	font-weight: bold;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	font-size: 14px;
 	font-family: Montserrat;
 	outline: none;
@@ -347,7 +420,68 @@ box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
 .pic-block{
 	width: 100%;
+	position: relative;
 }
+
+.cart{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background: #214b63;
+	right: 7%;
+	top: -5%;
+	cursor: pointer;
+	text-align: center;
+	padding: 0.2em;
+	color: #e3f1d5;
+}
+
+.cart2{
+	background: #e15960;
+}
+
+.show{
+	position: absolute;
+	width: 100px;
+	background: #ddd;
+	right: 7%;
+	top: 20%;
+}
+
+/* Tooltip tutorial https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip */
+.tooltiptext{
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+	 border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+.cart:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
 
 .pic-block img{
 	width: 90%;
@@ -401,13 +535,15 @@ box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .description {
-  margin: 0;
-  padding: 0 24px 24px;
+  margin-top: -5px;
+  padding: 0 24px 0 24px;
   font-size: 15px;
   line-height: 1.5;
 }
 
-
+.pic-description{
+	display: flex;
+}
 
 .description-list{
 	list-style: none;
@@ -749,4 +885,182 @@ button {
 		background: #e15960;
 		margin: 5px 0px;
 	}
+}
+/* Modal styling from https://www.w3schools.com/howto/howto_css_modals.asp*/
+/* The Modal (background) */
+.modal{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 200px;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+	 background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+         
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 1% 15% 0 15%;
+    padding: 20px;
+	 border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+}
+
+.product-modal-content{
+  margin-top: 1%;
+  height: 85%;
+}
+
+.attendant-modal-content{
+	height: 90%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.category-form{
+	width: 500px;
+	margin: 10% 10% 30%;
+}
+
+.category-name{
+	background: none;
+}
+
+.category-desc{
+	width: 100%;	
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+	font-size: 14px;
+	font-family: Montserrat;
+	padding: 13px 40px 0 10px;
+	outline: none;
+}
+.category-name:focus,.category-desc:focus{
+	background: none;
+	border: 1px solid #ff656c;
+}
+
+.category-title{
+color: #214b63;
+margin: 5% auto;
+width: 50%;
+font-size: 30px;
+}
+
+.login {
+	width: 100%;
+	height: 40px;
+	background: #ff656c;
+	border-radius: 5px;
+	border: 1px solid #e15960;
+	color: #fff;
+	font-weight: bold;
+	text-transform: capitalize;
+	font-size: 14px;
+	font-family: Montserrat;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+}
+
+.login:hover {
+	background: #ffffff;
+	color: #ff656c;
+	border:1px solid #ff656c;
+}
+
+.price-container{
+display: flex;
+margin: 1em 0 0 3em;
+width: 50%;
+justify-content: space-between;
+padding: 1em;
+background: #fefefe;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.price-container ul{
+	list-style-type: none;
+	width: 50%;
+	margin: 1em;
+}
+
+.titles,.values{
+	font-size: 17px;
+	color: #555 ;
+}
+
+.titles li,.values li{
+	margin: 0.7em;
+	border-bottom: 1px solid #aaa;
+}
+
+.values{
+	text-align: start;
+}
+
+.items-title{
+	display: flex;
+	width: 80%;
+	background: #ddd;
+	margin: 2em 0 0 3em;
+	padding: 0.5em;
+	list-style-type: none;
+	text-transform: capitalize;
+	justify-content: space-around;
+	font-weight: bold;
+}
+
+.items-details{
+	display: flex;
+	border-bottom: 1px solid #e3f1d5;
+	width: 80%;
+	margin: 2em 0 0 3em;
+	padding: 0.5em;
+	list-style-type: none;
+	text-transform: capitalize;
+	justify-content: space-around;
+}
+
+.items-details img{
+width: 100px;
+height: 100px;
 }
