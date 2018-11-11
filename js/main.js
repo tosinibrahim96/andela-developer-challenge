@@ -2,16 +2,35 @@ const togggleButton = document.querySelector(".toggle-btn");
 const sidebar = document.getElementById("sidebar");
 let input, filter, table, tr, td, i;
 input = document.getElementById("myInput");
+// Get the modal
+const modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+const btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close");
+
 
 $(document).ready(() => {
+	let changed = $(".incr").html();
 	$(".admin-box").hide();
-	$("#show").click(function() {
+	$("#show").click(function () {
 		$(".attendant-box").hide();
 		$(".admin-box").fadeIn(200);
 	});
-	$("#hide").click(function() {
+	$("#hide").click(function () {
 		$(".attendant-box").fadeIn(200);
 		$(".admin-box").hide();
+	});
+	$(".close").click(function () {
+		$("#myModal").hide("fast");
+	});
+	$(".myBtn").click(function () {
+		$(".incr").html(++changed);
+	});
+	$(".btn-close").click(function () {
+		$("#myModal").hide(10);
 	});
 });
 
@@ -39,5 +58,25 @@ searchProduct = () => {
 	}
 };
 
+
+// When the user clicks on the button, open the modal 
+showModal = () => {
+	modal.style.display = "block";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = (event) => {
+	if (event.target == modal) {
+		modal.style.display = "none";
+	}
+}
+
+if (input) {
+	input.addEventListener("keyup", searchProduct);
+}
+
+btn.addEventListener("click", showModal);
 togggleButton.addEventListener("click", toggleSidebar);
-input.addEventListener("keyup", searchProduct);
+
+
+
