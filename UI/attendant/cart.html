@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Store Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="screen" href="/andela-developer-challenge/styles/main.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="left">
+      <div id="sidebar" class="active">
+        <div class="toggle-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <!-- toggle-button -->
+        <h1 id="logo">shoppy</h1>
+        <ul>
+          <a href="index.html">
+            <li><i class="fas fa-tachometer-alt"></i> Dashboard
+            </li>
+          </a>
+          <a href="categories.html">
+            <li><i class="fas fa-people-carry"></i> categories</li>
+          </a>
+          <a href="product_list.html">
+            <li><i class="fas fa-people-carry"></i> products</li>
+          </a>
+          <a href="sales.html">
+            <li><i class="fas fa-dollar-sign"></i> sales</li>
+          </a>
+          <a class="arrow-container" href="#">
+            <div class="arrow-left"></div>
+            <li><i class="fas fa-shopping-cart"></i> Cart
+            </li>
+          </a>
+          <a href="/andela-developer-challenge/index.html">
+            <li><i class="fas fa-sign-out-alt"></i> logout</li>
+          </a>
+
+        </ul>
+      </div>
+      <!-- sidebar -->
+    </div>
+    <!-- End of left side -->
+    <div class="right">
+      <button class="add" id="myBtn"></i> Checkout
+      </button>
+      <div class="price-container">
+        <ul class="titles">
+          <strong>
+            <li>Order Summary</li>
+          </strong>
+          <li>Sub-Total</li>
+          <li>Other Charges</li>
+          <strong>
+            <li>Total</li>
+          </strong>
+        </ul>
+        <ul class="values">
+          <strong>
+            <li>2 Items</li>
+          </strong>
+          <li>$2500</li>
+          <li>$1000</li>
+          <strong>
+            <li>$3500</li>
+          </strong>
+        </ul>
+      </div>
+      <div class="items-container">
+        <ul class="items-title">
+          <li>Item Details</li>
+          <li>Quantity</li>
+          <li>Item Price</li>
+          <li>Size</li>
+          <li>Total</li>
+        </ul>
+        <ul class="items-details">
+          <li><img src="../images/p2.jpg" alt="product image"></li>
+          <li>
+            <select name="" id="">
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+              <option value="">5</option>
+              <option value="">6</option>
+            </select>
+          </li>
+          <li>$500</li>
+          <li>43</li>
+          <li>$500</li>
+        </ul>
+        <ul class="items-details">
+          <li><img src="../images/p1.jpg" alt="product image"></li>
+          <li>
+            <select name="" id="">
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+              <option value="">5</option>
+              <option value="">6</option>
+            </select>
+          </li>
+          <li>$350</li>
+          <li>40</li>
+          <li>$500</li>
+        </ul>
+      </div>
+      <!-- up-info-container -->
+      <!-- The Modal -->
+      <div id="myModal" class="modal fadeIn">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <!-- Add category form -->
+          <div class="login-wrapper">
+            <h3 class="login-title category-title">Are You Sure You Want to Checkout</h3>
+            <a href="index.html">
+              <center><button class="navigate btn-close">OK</button></center>
+            </a>
+          </div><!-- Add category form -->
+        </div><!-- modal content -->
+      </div><!-- modal -->
+    </div>
+    <!-- End of right side -->
+  </div>
+  <!-- End of wrapper -->
+
+
+  <script src="/andela-developer-challenge/js/jquery.js"></script>
+  <script src="/andela-developer-challenge/js/main.js"></script>
+  <script type="text/javascript"> (function () { let css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+</body>
+
+</html>
