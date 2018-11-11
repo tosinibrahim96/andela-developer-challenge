@@ -36,16 +36,6 @@ describe('POST /auth', () => {
       _chai2.default.request(_server2.default).post('/api/v1/auth/signup').set("token", res.body.token).send(newAttendant).end((err, res) => {
         res.should.have.status(201);
       });
-      done(err);
-    });
-  });
-});
-
-describe('GET /users', () => {
-  it('should give a user access to system and view all users', done => {
-    _chai2.default.request(_server2.default).post('/api/v1/auth/login').send(adminCredentials).end((err, res) => {
-      res.should.have.status(200);
-      expect(res.body.message).to.equal('Login Successful');
       _chai2.default.request(_server2.default).get('/api/v1/users').set("token", res.body.token).end((err, res) => {
         res.should.have.status(201);
       });
