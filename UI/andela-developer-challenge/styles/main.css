@@ -1077,3 +1077,10 @@ height: 100px;
 	padding: 0.5em;
 	display: none;
 }
+
+.access-denied{
+	margin: 10% auto;
+	text-align: center;
+	color: #e15960;
+	font-size: 30px;
+}
