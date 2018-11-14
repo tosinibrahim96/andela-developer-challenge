@@ -10,6 +10,8 @@ const btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 const span = document.getElementsByClassName("close");
+const logoutButton = document.querySelector(".logout-button");
+const token = localStorage.getItem("authToken");
 
 
 $(document).ready(() => {
@@ -71,12 +73,20 @@ window.onclick = (event) => {
 	}
 }
 
-if (input) {
+if (input || btn) {
 	input.addEventListener("keyup", searchProduct);
+	btn.addEventListener("click", showModal);
+	togggleButton.addEventListener("click", toggleSidebar);
 }
 
-btn.addEventListener("click", showModal);
-togggleButton.addEventListener("click", toggleSidebar);
+if (logoutButton) {
+	logoutButton.addEventListener('click', () => {
+		localStorage.removeItem('authToken');
+		window.location = "/index.html";
+	});
+	
+}
+
 
 
 
