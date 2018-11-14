@@ -149,6 +149,7 @@ top: -10px;
 	font-weight: 500;
 	padding: 15px 10px;
 	border-bottom: 1px solid #ffffff78;
+	cursor: pointer;
 }
 
 #sidebar ul li:hover {
@@ -1063,4 +1064,16 @@ background: #fefefe;
 .items-details img{
 width: 100px;
 height: 100px;
+}
+
+.login-error{
+	background: #e15960;
+	color: #fefefe;
+	font-size: 12px;
+	text-align: center;
+	width: 110%;
+	margin: 0 auto;
+	border-radius: 5px;
+	padding: 0.5em;
+	display: none;
 }
