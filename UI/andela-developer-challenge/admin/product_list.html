@@ -219,14 +219,13 @@
           <!-- Add category form -->
           <div class="login-wrapper">
             <h1 class="login-title category-title">Add new product</h1>
-            <form class="login-form category-form">
-              <input required type="text" placeholder="Product Name" id="username" name="cat-name" class="username category-name" />
-              <select required name="" id="" class="username category-name">
-                <option value="">Select Category</option>
+            <form class="login-form category-form add-product">
+              <input required type="text" placeholder="Product Name" id="product-name" name="cat-name" class="username category-name" />
+              <select required name="category-dropdown" id="category-dropdown" class="username category-name">
               </select>
-              <input required type="number" placeholder="Quantity" id="username" name="cat-name" class="username category-name" />
-              <input type="number" placeholder="Size" id="username" name="cat-name" class="username category-name" />
-              <input required type="number" placeholder="Price" id="username" name="cat-name" class="username category-name" />
+              <input required type="number" placeholder="Price" id="product-price" name="cat-name" class="username category-name" />
+              <input type="number" placeholder="Quantity" id="product-quantity" name="cat-name" class="username category-name" />
+              <textarea class="username category-name" required placeholder="Description" name="product-desc" id="product-description" cols="30" rows="10"></textarea>
               <input type="submit" value="Add product" id="loginbutton" name="loginbutton" class="login btn-close" />
             </form>
           </div><!-- Add category form -->
