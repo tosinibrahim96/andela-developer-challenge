@@ -58,7 +58,10 @@ class Helper {
 			quantity: Joi.number()
 				.min(1)
 				.required(),
-			description: Joi.string().required()
+			description: Joi.string().required(),
+			image_url: Joi.string()
+				.uri()
+				.required()
 		});
 
 		return Joi.validate(data, schema);
@@ -67,7 +70,7 @@ class Helper {
 	static validateAttendant(data) {
 		// define the validation schema
 		const schema = Joi.object().keys({
-		sale_price: Joi.number()
+			sale_price: Joi.number()
 				.required()
 				.min(1)
 		});
@@ -86,7 +89,7 @@ class Helper {
 				.required(),
 			item_price: Joi.number()
 				.min(1)
-				.required(),
+				.required()
 		});
 
 		return Joi.validate(data, schema);
@@ -104,7 +107,6 @@ class Helper {
 			message: "The User does not any sales record at the moment."
 		});
 	}
-
 
 	static invalidDataMsg(res, error) {
 		// send a 422 error response if validation fails
