@@ -39,5 +39,10 @@
 
 -- INSERT INTO users(email, password,role) 
 -- VALUES ('admin@mail.com', 'md596e79218965eb72c92a549dd5a330112' ,'admin');
-ALTER TABLE products 
-ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://imgur.com/S3LYe5b');
+
+-- ALTER TABLE products 
+-- DROP COLUMN image_url;
+
+ALTER TABLE categories 
+ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://i.imgur.com/WK8X2Qn.jpg'),
+ADD COLUMN short_desc VARCHAR(150) NOT NULL DEFAULT ('This is a short description');

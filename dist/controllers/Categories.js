@@ -8,6 +8,10 @@ var _conn = require('../models/conn');
 
 var _conn2 = _interopRequireDefault(_conn);
 
+var _Helper = require('../helper/Helper');
+
+var _Helper2 = _interopRequireDefault(_Helper);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class Category {
@@ -17,12 +21,13 @@ class Category {
   static async create(req, res) {
     const userRole = req.user.role;
     if (userRole === 'admin') {
-      if (!req.body.name) {
-        return res.status(400).send({ message: 'Category name is missing' });
+      const data = req.body;
+      const result = _Helper2.default.validateCategory(data);
+      if (result.error) {
+        return _Helper2.default.invalidDataMsg(res, result.error);
       }
-
-      const createQuery = 'INSERT INTO categories (name) VALUES ($1) returning *';
-      const values = [req.body.name];
+      const createQuery = 'INSERT INTO categories (name,image_url,short_desc) VALUES ($1,$2,$3) returning *';
+      const values = [req.body.name, req.body.image_url, req.body.description];
       try {
         const { rows } = await _conn2.default.query(createQuery, values);
         return res.status(201).send({ rows });

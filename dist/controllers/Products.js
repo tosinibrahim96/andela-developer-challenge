@@ -55,8 +55,8 @@ class Product {
       }
       const checkCategory = 'SELECT * FROM categories WHERE id =$1';
       const catValues = [parseInt(req.body.category_id, 10)];
-      const createQuery = 'INSERT INTO products (name,cat_id,price,quantity,description) VALUES ($1,$2,$3,$4,$5) returning *';
-      const values = [req.body.name.trim(), parseInt(req.body.category_id, 10), req.body.price, req.body.quantity, req.body.description.trim()];
+      const createQuery = 'INSERT INTO products (name,cat_id,price,quantity,description,image_url) VALUES ($1,$2,$3,$4,$5) returning *';
+      const values = [req.body.name.trim(), parseInt(req.body.category_id, 10), req.body.price, req.body.quantity, req.body.description.trim(), req.body.image_url.trim()];
       try {
         const { rowCount } = await _conn2.default.query(checkCategory, catValues);
         if (rowCount <= 0) {
@@ -90,7 +90,7 @@ class Product {
           res.status(400).send({ message: 'The Product not in this category' });
           return;
         }
-        const values = [req.body.name.trim() || rows[0].name, parseInt(req.body.category_id, 10) || rows[0].cat_id, req.body.price || rows[0].price, req.body.quantity || rows[0].quantity, req.body.description.trim() || rows[0].description, req.params.id];
+        const values = [req.body.name.trim() || rows[0].name, parseInt(req.body.category_id, 10) || rows[0].cat_id, req.body.price || rows[0].price, req.body.quantity || rows[0].quantity, req.body.description.trim() || rows[0].description, req.body.image_url.trim() || rows[0].image_url, req.params.id];
         await _conn2.default.query(updateProduct, values);
         return res.status(200).send({ Message: 'Product update successful' });
       } catch (err) {

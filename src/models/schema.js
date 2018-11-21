@@ -50,10 +50,17 @@ const pword = bcrypt.hashSync('111111', bcrypt.genSaltSync());
 //     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE  
 //     );`;
 
-const alter_users = `ALTER TABLE products 
-ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://imgur.com/S3LYe5b');`;
+// const removeImage = `ALTER TABLE products
+// DROP COLUMN image_url;`;
+
+// const addImage= `ALTER TABLE products
+// ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT('https://i.imgur.com/S3LYe5b.jpg');`;
 // const addAdmin = ` INSERT INTO users(email, password,role) 
 // VALUES ('admin@mail.com', '${pword}' ,'admin');`;
 
-const tables = `${alter_users}`;
+const alterCategory = `ALTER TABLE categories 
+ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://i.imgur.com/WK8X2Qn.jpg'),
+ADD COLUMN short_desc VARCHAR(150) NOT NULL DEFAULT ('This is a short description');`;
+
+const tables = `${alterCategory}`;
 export default tables;

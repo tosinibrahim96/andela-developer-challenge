@@ -67,6 +67,18 @@ class Helper {
 			category_id: _joi2.default.number().required(),
 			price: _joi2.default.number().min(1).required(),
 			quantity: _joi2.default.number().min(1).required(),
+			description: _joi2.default.string().required(),
+			image_url: _joi2.default.string().uri().required()
+		});
+
+		return _joi2.default.validate(data, schema);
+	}
+
+	static validateCategory(data) {
+		// define the validation schema
+		const schema = _joi2.default.object().keys({
+			name: _joi2.default.string().required(),
+			image_url: _joi2.default.string().uri().required(),
 			description: _joi2.default.string().required()
 		});
 

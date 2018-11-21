@@ -67,6 +67,19 @@ class Helper {
 		return Joi.validate(data, schema);
 	}
 
+	static validateCategory(data) {
+		// define the validation schema
+		const schema = Joi.object().keys({
+			name: Joi.string().required(),
+			image_url: Joi.string()
+				.uri()
+				.required(),
+			description: Joi.string().required()
+		});
+
+		return Joi.validate(data, schema);
+	}
+
 	static validateAttendant(data) {
 		// define the validation schema
 		const schema = Joi.object().keys({
