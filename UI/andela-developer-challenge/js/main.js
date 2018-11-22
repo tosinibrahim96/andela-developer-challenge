@@ -29,6 +29,8 @@ const productImage = document.getElementById("product-image");
 const addProductForm = document.querySelector(".add-product");
 const testImage = document.querySelector(".image-test");
 const categoryIndex = document.querySelector(".category-index");
+const productIndex = document.querySelector(".product-index");
+
 
 $(document).ready(() => {
 	let changed = $(".incr").html();
@@ -367,6 +369,98 @@ if (categoryIndex) {
 			if (data.rows) {
 				for (let index = 0; index < data.rows.length; index++) {
 					createCategoryPicture(data.rows[index], index);
+				}
+			}
+		})
+		.catch(error => console.log(error));
+}
+
+const createProductPicture = (data,index) =>{
+
+	const productBlock = document.createElement("div");
+	const productPicBLock = document.createElement("div");
+	const imageOfProduct = document.createElement("img");
+	const productInfo = document.createElement("div");
+	const titleText = document.createElement("h6");
+	const descriptionList = document.createElement("ul");
+	const deleteButton = document.createElement("button");
+	const editButton = document.createElement("button");
+	const allContainer = document.querySelector(".attendant-info-container");
+
+	productBlock.classList.add("attendant-product-block");
+	productPicBLock.classList.add("pic-block", "product-pic-block");
+	productInfo.classList.add("info");
+	descriptionList.classList.add("description,description-list");
+	titleText.classList.add("title");
+	deleteButton.classList.add('delete');
+	editButton.classList.add('edit');
+
+
+	titleText.innerText = data.product_name;
+	imageOfProduct.alt = "Product Image";
+	imageOfProduct.src = data.product_image_url;
+
+	for (let index = 0; index < 4; index++) {
+		const productList = document.createElement("li");
+		const spanElement = document.createElement("span");
+
+		if (index == 0) {
+			const categoryText = document.createElement("strong");
+			spanElement.classList.add("span-one");
+			spanElement.innerHTML = data.category_name;
+			categoryText.innerText = "Category:";
+			productList.appendChild(categoryText);
+			productList.appendChild(spanElement);
+			descriptionList.appendChild(productList);
+		} else if (index == 1) {
+			const priceText = document.createElement("strong");
+			spanElement.classList.add("span-two");
+			spanElement.innerHTML = data.product_price;
+			priceText.innerText = "Price:";
+			productList.appendChild(priceText);
+			productList.appendChild(spanElement);
+			descriptionList.appendChild(productList);
+		} else if (index == 2) {
+			const quantityText = document.createElement("strong");
+			spanElement.classList.add("span-three");
+			spanElement.innerHTML = data.product_quantity;
+			quantityText.innerText = "Quantity:";
+			productList.appendChild(quantityText);
+			productList.appendChild(spanElement);
+			descriptionList.appendChild(productList);
+		} else if (index == 3) {
+			deleteButton.innerText = 'Delete';
+			editButton.innerText = 'Edit';
+			productList.appendChild(deleteButton);
+			productList.appendChild(editButton);
+			descriptionList.appendChild(productList);
+		}
+	}
+
+	productInfo.appendChild(titleText);
+	productInfo.appendChild(descriptionList);
+	productPicBLock.appendChild(imageOfProduct);
+	productPicBLock.appendChild(productInfo);
+	productBlock.appendChild(productPicBLock);
+	allContainer.appendChild(productBlock);
+}
+
+
+
+
+if (productIndex) {
+	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/products/", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			token: localStorage.getItem("authToken")
+		}
+	})
+		.then(res => res.json())
+		.then(data => {
+			if (data.rows) {
+				for (let index = 0; index < data.rows.length; index++) {
+					createProductPicture(data.rows[index], index);
 				}
 			}
 		})
