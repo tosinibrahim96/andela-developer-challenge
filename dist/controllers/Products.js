@@ -55,7 +55,7 @@ class Product {
       }
       const checkCategory = 'SELECT * FROM categories WHERE id =$1';
       const catValues = [parseInt(req.body.category_id, 10)];
-      const createQuery = 'INSERT INTO products (name,cat_id,price,quantity,description,image_url) VALUES ($1,$2,$3,$4,$5) returning *';
+      const createQuery = 'INSERT INTO products (name,cat_id,price,quantity,description,image_url) VALUES ($1,$2,$3,$4,$5,$6) returning *';
       const values = [req.body.name.trim(), parseInt(req.body.category_id, 10), req.body.price, req.body.quantity, req.body.description.trim(), req.body.image_url.trim()];
       try {
         const { rowCount } = await _conn2.default.query(checkCategory, catValues);
@@ -68,7 +68,9 @@ class Product {
       } catch (error) {
         console.log(res.status(422).send(error));
       }
-    }return res.status(401).send({ Message: 'Unauthorised Action' });
+    } else {
+      return res.status(401).send({ Message: 'Unauthorised Action' });
+    }
   }
 
   static async updateProduct(req, res) {

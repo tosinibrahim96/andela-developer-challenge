@@ -13,6 +13,8 @@ const span = document.getElementsByClassName("close");
 const logoutButton = document.querySelector(".logout-button");
 const token = localStorage.getItem("authToken");
 const categoryName = document.getElementById("categoryName");
+const categoryImage = document.getElementById("category-image");
+const categoryDescription = document.getElementById("category-description");
 const addCategoryForm = document.querySelector(".add-category");
 const attendantMail = document.getElementById("attendant-mail");
 const attendantPassword = document.getElementById("attendant-password");
@@ -23,8 +25,10 @@ const productName = document.getElementById("product-name");
 const productPrice = document.getElementById("product-price");
 const productQuantity = document.getElementById("product-quantity");
 const productDescription = document.getElementById("product-description");
+const productImage = document.getElementById("product-image");
 const addProductForm = document.querySelector(".add-product");
 const testImage = document.querySelector(".image-test");
+const categoryIndex = document.querySelector(".category-index");
 
 $(document).ready(() => {
 	let changed = $(".incr").html();
@@ -109,13 +113,16 @@ if (addCategoryForm) {
 					"Content-Type": "application/json",
 					token: localStorage.getItem("authToken")
 				},
-				body: JSON.stringify({ name: categoryName.value })
+				body: JSON.stringify({
+					name: categoryName.value,
+					image_url: categoryImage.value,
+					description: categoryDescription.value
+				})
 			}
 		)
 			.then(res => res.json())
 			.then(data => {
 				if (data.rows) {
-					console.log("successfully added");
 					location.reload();
 				}
 			})
@@ -186,6 +193,7 @@ if (categoryDropdown) {
 }
 
 if (addProductForm) {
+	console.log(productName.value,productImage.value);
 	addProductForm.addEventListener("submit", event => {
 		fetch("https://andela-developer-challenge.herokuapp.com/api/v1/products/", {
 			method: "POST",
@@ -198,7 +206,8 @@ if (addProductForm) {
 				category_id: categoryDropdown.value,
 				price: productPrice.value,
 				quantity: productQuantity.value,
-				description: productDescription.value
+				description: productDescription.value,
+				image_url:productImage.value
 			})
 		})
 			.then(res => res.json())
@@ -213,7 +222,7 @@ if (addProductForm) {
 	});
 }
 
-const createPicture = (data,index) => {
+const createPicture = (data, index) => {
 	let changed = $(".incr").html();
 	const infoBlock = document.createElement("div");
 	const picBlock = document.createElement("div");
@@ -226,7 +235,9 @@ const createPicture = (data,index) => {
 	const allContainer = document.querySelector(".attendant-info-container");
 
 	//if statement to determine colour of add to cart button
-	index % 2 !== 0 ? cartButton.classList.add("cart", "cart2", "myBtn") : cartButton.classList.add("cart", "myBtn");
+	index % 2 !== 0
+		? cartButton.classList.add("cart", "cart2", "myBtn")
+		: cartButton.classList.add("cart", "myBtn");
 	plusSign.classList.add("fas", "fa-plus");
 	toolTipText.classList.add("tooltiptext");
 	infoBlock.classList.add("attendant-info-block");
@@ -277,7 +288,7 @@ const createPicture = (data,index) => {
 	infoBlock.appendChild(picDescription);
 	allContainer.appendChild(infoBlock);
 
-	$(".myBtn").click(function () {
+	$(".myBtn").click(function() {
 		$(".incr").html(++changed);
 	});
 };
@@ -293,12 +304,70 @@ if (testImage) {
 		.then(res => res.json())
 		.then(data => {
 			if (data.rows) {
-				for(let index=0; index<data.rows.length; index++){
-					createPicture(data.rows[index],index);
+				for (let index = 0; index < data.rows.length; index++) {
+					createPicture(data.rows[index], index);
 				}
 				document.querySelectorAll(".tooltiptext").forEach(element => {
 					element.innerText = "Add to Cart";
 				});
+			}
+		})
+		.catch(error => console.log(error));
+}
+
+const createCategoryPicture = data => {
+	const infoBlock = document.createElement("div");
+	const productPicBLock = document.createElement("div");
+	const catImage = document.createElement("img");
+	const catInfo = document.createElement("div");
+	const titleLink = document.createElement("a");
+	const titleText = document.createElement("h6");
+	const catdescription = document.createElement("p");
+	const deleteButton = document.createElement("button");
+	const editButton = document.createElement("button");
+	const allContainer = document.querySelector(".attendant-info-container");
+
+	infoBlock.classList.add("attendant-info-block");
+	productPicBLock.classList.add("pic-block", "product-pic-block");
+	catInfo.classList.add("info");
+	catdescription.classList.add("description");
+	titleText.classList.add("title");
+	deleteButton.classList.add("delete");
+	editButton.classList.add("edit");
+
+	catImage.alt = "Product Image";
+	catImage.src = data.image_url;
+	titleLink.href = "#";
+	titleText.innerText = data.name;
+	catdescription.innerText = data.short_desc;
+	deleteButton.innerText = "Delete";
+	editButton.innerText = "Edit";
+
+	titleLink.appendChild(titleText);
+	catInfo.appendChild(titleLink);
+	catInfo.appendChild(catdescription);
+	catInfo.appendChild(deleteButton);
+	catInfo.appendChild(editButton);
+	productPicBLock.appendChild(catImage);
+	productPicBLock.appendChild(catInfo);
+	infoBlock.appendChild(productPicBLock);
+	allContainer.appendChild(infoBlock);
+};
+
+if (categoryIndex) {
+	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/categories/", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			token: localStorage.getItem("authToken")
+		}
+	})
+		.then(res => res.json())
+		.then(data => {
+			if (data.rows) {
+				for (let index = 0; index < data.rows.length; index++) {
+					createCategoryPicture(data.rows[index], index);
+				}
 			}
 		})
 		.catch(error => console.log(error));
