@@ -570,19 +570,15 @@ padding-left: 0.5em;
 }
 
 .span-one{
-	padding-left: 2em;
+	padding-left: 0.5em;
 }
 
 .span-two{
-	padding-left: 2.3em;
+	padding-left: 2.8em;
 }
 
 .span-three{
-	padding-left: 4.7em;
-}
-
-.span-four{
-	padding-left: 4.1em;
+	padding-left: 1.0em;
 }
 
 .button-container{

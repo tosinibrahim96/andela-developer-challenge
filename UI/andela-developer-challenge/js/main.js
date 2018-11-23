@@ -390,7 +390,7 @@ const createProductPicture = (data,index) =>{
 	productBlock.classList.add("attendant-product-block");
 	productPicBLock.classList.add("pic-block", "product-pic-block");
 	productInfo.classList.add("info");
-	descriptionList.classList.add("description,description-list");
+	descriptionList.classList.add("description", "description-list");
 	titleText.classList.add("title");
 	deleteButton.classList.add('delete');
 	editButton.classList.add('edit');
@@ -406,9 +406,10 @@ const createProductPicture = (data,index) =>{
 
 		if (index == 0) {
 			const categoryText = document.createElement("strong");
+			categoryText.innerHTML = "Category:";
 			spanElement.classList.add("span-one");
 			spanElement.innerHTML = data.category_name;
-			categoryText.innerText = "Category:";
+			
 			productList.appendChild(categoryText);
 			productList.appendChild(spanElement);
 			descriptionList.appendChild(productList);
@@ -416,7 +417,7 @@ const createProductPicture = (data,index) =>{
 			const priceText = document.createElement("strong");
 			spanElement.classList.add("span-two");
 			spanElement.innerHTML = data.product_price;
-			priceText.innerText = "Price:";
+			priceText.innerHTML = "Price:";
 			productList.appendChild(priceText);
 			productList.appendChild(spanElement);
 			descriptionList.appendChild(productList);
@@ -424,7 +425,7 @@ const createProductPicture = (data,index) =>{
 			const quantityText = document.createElement("strong");
 			spanElement.classList.add("span-three");
 			spanElement.innerHTML = data.product_quantity;
-			quantityText.innerText = "Quantity:";
+			quantityText.innerHTML = "Quantity:";
 			productList.appendChild(quantityText);
 			productList.appendChild(spanElement);
 			descriptionList.appendChild(productList);
