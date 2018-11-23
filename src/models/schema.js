@@ -58,9 +58,11 @@ const pword = bcrypt.hashSync('111111', bcrypt.genSaltSync());
 // const addAdmin = ` INSERT INTO users(email, password,role) 
 // VALUES ('admin@mail.com', '${pword}' ,'admin');`;
 
-const alterCategory = `ALTER TABLE categories 
-ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://i.imgur.com/WK8X2Qn.jpg'),
-ADD COLUMN short_desc VARCHAR(150) NOT NULL DEFAULT ('This is a short description');`;
+const alterUsers = `ALTER TABLE users 
+ADD COLUMN first_name VARCHAR(150) NOT NULL DEFAULT ('John Doe'),
+ADD COLUMN mobile_number VARCHAR(20) NOT NULL DEFAULT ('08076543241'),
+ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://i.imgur.com/27DUH5b.jpg'),
+ADD COLUMN sales INTEGER NOT NULL DEFAULT (0);`;
 
-const tables = `${alterCategory}`;
+const tables = `${alterUsers}`;
 export default tables;

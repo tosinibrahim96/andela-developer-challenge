@@ -22,14 +22,18 @@ class Helper {
 	/**
 	 * isValidEmail helper method
 	 */
-	static isValidEmail(email) {
+	static isValiInfo(data) {
 		const schema = Joi.object().keys({
-			email: Joi.string()
-				.email()
+			email: Joi.string().email().required(),
+			password:Joi.required(),
+			first_name: Joi.string().required(),
+			mobile_number: Joi.string().regex(/^\d{3}\d{4}\d{4}$/).required(),
+			image_url: Joi.string()
+				.uri()
 				.required()
 		});
 
-		return Joi.validate(email, schema);
+		return Joi.validate(data, schema);
 	}
 
 	/**

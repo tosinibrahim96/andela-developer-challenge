@@ -19,6 +19,9 @@ const addCategoryForm = document.querySelector(".add-category");
 const attendantMail = document.getElementById("attendant-mail");
 const attendantPassword = document.getElementById("attendant-password");
 const addAttendantForm = document.querySelector(".add-attendant");
+const attendantName = document.getElementById("attendant-name");
+const attendantContact = document.getElementById('attendant-mobile');
+const attendantImage = document.getElementById('attendant-img');
 const categoryDropdown = document.getElementById("category-dropdown");
 let defaultOption = document.createElement("option");
 const productName = document.getElementById("product-name");
@@ -136,7 +139,7 @@ if (addCategoryForm) {
 if (addAttendantForm) {
 	addAttendantForm.addEventListener("submit", event => {
 		fetch(
-			"https://andela-developer-challenge.herokuapp.com/api/v1/auth/signup",
+			"https://andela-developer-challenge.herokuapp.com/api/v1/auth/signup/",
 			{
 				method: "POST",
 				headers: {
@@ -145,14 +148,16 @@ if (addAttendantForm) {
 				},
 				body: JSON.stringify({
 					email: attendantMail.value,
-					password: attendantPassword.value
+					password: attendantPassword.value,
+					first_name: attendantName.value,
+					mobile_number: attendantContact.value,
+					image_url: attendantImage.value
 				})
 			}
 		)
 			.then(res => res.json())
 			.then(data => {
 				if (data.rows) {
-					console.log("successfully added");
 					location.reload();
 				}
 			})
@@ -160,6 +165,8 @@ if (addAttendantForm) {
 		event.preventDefault();
 	});
 }
+
+
 
 if (categoryDropdown) {
 	(() => {
@@ -215,7 +222,6 @@ if (addProductForm) {
 			.then(res => res.json())
 			.then(data => {
 				if (data.rows) {
-					console.log("successfully added");
 					location.reload();
 				}
 			})
