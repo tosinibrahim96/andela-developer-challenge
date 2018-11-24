@@ -34,6 +34,8 @@ const testImage = document.querySelector(".image-test");
 const categoryIndex = document.querySelector(".category-index");
 const productIndex = document.querySelector(".product-index");
 const attendantIndex = document.querySelector(".attendant-index");
+const salesIndex = document.querySelector(".sales-information");
+
 
 $(document).ready(() => {
 	let changed = $(".incr").html();
@@ -561,3 +563,59 @@ if (attendantIndex){
 		})
 		.catch(error => console.log(error));
 }
+
+const createSalesTable = (data)=>{
+	
+	const tablerow = document.createElement('tr')
+	const nameColumn = document.createElement('td')
+	const productColumn = document.createElement('td')
+	const categoryColumn = document.createElement('td')
+	const quantityColumn = document.createElement('td')
+	const priceColumn = document.createElement('td')
+	const operationColumn = document.createElement('td') 
+	const deleteButton = document.createElement("button");
+	const editButton = document.createElement("button");
+	
+	deleteButton.classList.add('delete');
+	editButton.classList.add('edit');
+	deleteButton.innerText = 'Delete';
+	editButton.innerText = 'Edit';
+
+	nameColumn.append(data.first_name);
+	productColumn.append(data.product_name);
+	categoryColumn.append(data.category_name);
+	quantityColumn.append(data.quantity);
+	priceColumn.append(data.item_price);
+	operationColumn.append(editButton);
+	operationColumn.append(deleteButton);
+
+	tablerow.appendChild(nameColumn);
+	tablerow.appendChild(productColumn);
+	tablerow.appendChild(categoryColumn);
+	tablerow.appendChild(quantityColumn);
+	tablerow.appendChild(priceColumn);
+	tablerow.appendChild(operationColumn);
+	salesIndex.appendChild(tablerow);
+}
+
+
+
+fetch("https://andela-developer-challenge.herokuapp.com/api/v1/sales/", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			token: localStorage.getItem("authToken")
+		}
+	})
+		.then(res => res.json())
+		.then(data => {
+			console.log(data);
+			if (data.attendantSale) {
+				for (let index = 0; index < data.attendantSale.rows.length; index++) {
+					createSalesTable(data.attendantSale.rows[index]);
+				}
+				
+			}
+		})
+		.catch(error => console.log(error));
+

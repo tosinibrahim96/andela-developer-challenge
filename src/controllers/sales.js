@@ -86,19 +86,24 @@ class Sale {
 		const userRole = req.user.role;
 		if (userRole === "admin") {
 			const salesByAttendant =
-				"select email,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id";
+				"select email,first_name,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id";
 			const salesByProductName =
-				"select name FROM products inner join salesitems on products.id = salesitems.product_id";
+				"select name,cat_id FROM products inner join salesitems on products.id = salesitems.product_id";
+				const selectCategoryName = "select name from categories where id = ($1)";
+			
 			try {
 				const attendantSale = await db.query(salesByAttendant);
 				const productNameSale = await db.query(salesByProductName);
+				
 				for (let index = 0; index < attendantSale.rows.length; index++) {
-					//for each sales object, add a product name attribute
-					attendantSale.rows[index].product_name =
-						productNameSale.rows[index].name;
+					//for each sales object, add a product name, category name attribute 
+					attendantSale.rows[index].product_name =	productNameSale.rows[index].name;
+					const categoryName = await db.query(selectCategoryName, [productNameSale.rows[index].cat_id]);
+					attendantSale.rows[index].category_name = categoryName.rows[0].name;
 				}
-				return res.status(200).send({ Sales_Info: attendantSale.rows });
+				return res.status(200).send({attendantSale});
 			} catch (error) {
+				console.log(error)
 				return res.status(400).send({ error });
 			}
 		}
