@@ -48,6 +48,13 @@ class Sale {
 			}
 			const salesInfoQuery = "INSERT INTO salesinfo (price) VALUES ($1) returning *";
 			const salesInfoValues = [req.body.price];
+			const updateUserSale = "UPDATE users SET sales = sales + ($1) WHERE id = ($2)";
+			const updateUserSaleValues = [req.body.price, req.user.id];
+			try {
+				await _conn2.default.query(updateUserSale, updateUserSaleValues);
+			} catch (error) {
+				console.log(res.status(400).send({ Error: error }));
+			}
 			try {
 				const createdSalesInfo = await _conn2.default.query(salesInfoQuery, salesInfoValues);
 				const salesId = createdSalesInfo.rows[0].id;
@@ -73,20 +80,20 @@ class Sale {
 
 	static async getAllSales(req, res) {
 		const userRole = req.user.role;
-		// if (userRole === "admin") {
-		const salesByAttendant = "select email,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id";
-		const salesByProductName = "select name FROM products inner join salesitems on products.id = salesitems.product_id";
-		try {
-			const attendantSale = await _conn2.default.query(salesByAttendant);
-			const productNameSale = await _conn2.default.query(salesByProductName);
-			for (let index = 0; index < attendantSale.rows.length; index++) {
-				//for each sales object, add a product name attribute
-				attendantSale.rows[index].product_name = productNameSale.rows[index].name;
+		if (userRole === "admin") {
+			const salesByAttendant = "select email,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id";
+			const salesByProductName = "select name FROM products inner join salesitems on products.id = salesitems.product_id";
+			try {
+				const attendantSale = await _conn2.default.query(salesByAttendant);
+				const productNameSale = await _conn2.default.query(salesByProductName);
+				for (let index = 0; index < attendantSale.rows.length; index++) {
+					//for each sales object, add a product name attribute
+					attendantSale.rows[index].product_name = productNameSale.rows[index].name;
+				}
+				return res.status(200).send({ Sales_Info: attendantSale.rows });
+			} catch (error) {
+				return res.status(400).send({ error });
 			}
-			return res.status(200).send({ Sales_Info: attendantSale.rows });
-		} catch (error) {
-			// 	return res.status(400).send({ error });
-			// }
 		}
 		return res.status(401).send({ Message: "Unauthorised Action" });
 	}

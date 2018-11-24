@@ -20,21 +20,16 @@ class User {
     */
   static async create(req, res) {
     const userRole = req.user.role;
-    const email = req.body.email;
-    const emailObject = { email: email };
-    const answer = _Helper2.default.isValidEmail(emailObject);
+    const data = req.body;
+    const answer = _Helper2.default.isValiInfo(data);
     if (userRole === 'admin') {
-      if (!req.body.email || !req.body.password) {
-        return res.status(400).send({ message: 'Some values are missing' });
-      }
       if (answer.error) {
-        res.status(400).send({ message: 'Please enter a valid email address' });
-        return;
+        return _Helper2.default.invalidDataMsg(res, answer.error);
       }
       const hashPassword = _Helper2.default.hashPassword(req.body.password);
 
-      const createQuery = 'INSERT INTO users (email,password,role) VALUES ($1, $2, $3) returning *';
-      const values = [req.body.email, hashPassword, 'attendant'];
+      const createQuery = 'INSERT INTO users (email,password,role,first_name,mobile_number,image_url,sales) VALUES ($1, $2, $3,$4,$5,$6,$7) returning *';
+      const values = [req.body.email, hashPassword, 'attendant', req.body.first_name, req.body.mobile_number, req.body.image_url, parseInt('0')];
       try {
         const { rows } = await _conn2.default.query(createQuery, values);
         return res.status(201).send({ rows });
@@ -42,10 +37,11 @@ class User {
         if (error.routine === '_bt_check_unique') {
           return res.status(400).send({ message: 'User with that EMAIL already exist' });
         }
-        console.log(res.status(400).send('error'));
+        console.log(res.status(400).send({ Error: error }));
       }
+    } else {
+      return res.status(401).send({ Message: 'Unauthorised Action' });
     }
-    return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 
   /**

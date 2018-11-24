@@ -41,12 +41,24 @@ class Helper {
 	/**
   * isValidEmail helper method
   */
-	static isValidEmail(email) {
+	static isValiInfo(data) {
+		const schema = _joi2.default.object().keys({
+			email: _joi2.default.string().email().required(),
+			password: _joi2.default.required(),
+			first_name: _joi2.default.string().required(),
+			mobile_number: _joi2.default.string().regex(/^\d{3}\d{4}\d{4}$/).required(),
+			image_url: _joi2.default.string().uri().required()
+		});
+
+		return _joi2.default.validate(data, schema);
+	}
+
+	static isValidEmail(data) {
 		const schema = _joi2.default.object().keys({
 			email: _joi2.default.string().email().required()
 		});
 
-		return _joi2.default.validate(email, schema);
+		return _joi2.default.validate(data, schema);
 	}
 
 	/**
