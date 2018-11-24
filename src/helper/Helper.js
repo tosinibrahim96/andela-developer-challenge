@@ -36,6 +36,14 @@ class Helper {
 		return Joi.validate(data, schema);
 	}
 
+	static isValidEmail(data) {
+		const schema = Joi.object().keys({
+			email: Joi.string().email().required(),
+		});
+
+		return Joi.validate(data, schema);
+	}
+
 	/**
 	 * Gnerate Token
 	 */

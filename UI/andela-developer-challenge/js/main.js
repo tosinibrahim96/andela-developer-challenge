@@ -33,7 +33,7 @@ const addProductForm = document.querySelector(".add-product");
 const testImage = document.querySelector(".image-test");
 const categoryIndex = document.querySelector(".category-index");
 const productIndex = document.querySelector(".product-index");
-
+const attendantIndex = document.querySelector(".attendant-index");
 
 $(document).ready(() => {
 	let changed = $(".incr").html();
@@ -468,6 +468,94 @@ if (productIndex) {
 			if (data.rows) {
 				for (let index = 0; index < data.rows.length; index++) {
 					createProductPicture(data.rows[index], index);
+				}
+			}
+		})
+		.catch(error => console.log(error));
+}
+
+
+const createAttendantPicture = (data,index)=>{
+
+		const attendantBlock = document.createElement("div");
+		const attendantPicBLock = document.createElement("div");
+		const imageOfattendant = document.createElement("img");
+		const attendantInfo = document.createElement("div");
+		const titleText = document.createElement("h6");
+		const descriptionList = document.createElement("ul");
+		const deleteButton = document.createElement("button");
+		const editButton = document.createElement("button");
+		const allContainer = document.querySelector(".attendant-info-container");
+
+		attendantBlock.classList.add("attendant-product-block");
+		attendantPicBLock.classList.add("pic-block", "product-pic-block", "att-info");
+		attendantInfo.classList.add("info");
+		descriptionList.classList.add("description", "description-list");
+		titleText.classList.add("title");
+		deleteButton.classList.add('delete');
+		editButton.classList.add('edit');
+
+
+		titleText.innerText = data.first_name;
+		imageOfattendant.alt = "Attendant Image";
+		imageOfattendant.src = data.image_url;
+
+		for (let index = 0; index < 4; index++) {
+			const attendantList = document.createElement("li");
+			const spanElement = document.createElement("span");
+
+			if (index == 0) {
+				const mailText = document.createElement("strong");
+				mailText.innerHTML = "Mail:";
+				spanElement.innerHTML = data.email;
+				attendantList.appendChild(mailText);
+				attendantList.appendChild(spanElement);
+				descriptionList.appendChild(attendantList);
+			} else if (index == 1) {
+				const mobileText = document.createElement("strong");
+				spanElement.innerHTML = data.mobile_number;
+				mobileText.innerHTML = "Contact:";
+				attendantList.appendChild(mobileText);
+				attendantList.appendChild(spanElement);
+				descriptionList.appendChild(attendantList);
+			} else if (index == 2) {
+				const salesText = document.createElement("strong");
+				spanElement.innerHTML = `$ ${data.sales}`;
+				salesText.innerHTML = "Sales:";
+				attendantList.appendChild(salesText);
+				attendantList.appendChild(spanElement);
+				descriptionList.appendChild(attendantList);
+			} else if (index == 3) {
+				deleteButton.innerText = 'Delete';
+				editButton.innerText = 'Edit';
+				attendantList.appendChild(deleteButton);
+				attendantList.appendChild(editButton);
+				descriptionList.appendChild(attendantList);
+			}
+		}
+
+		attendantInfo.appendChild(titleText);
+		attendantInfo.appendChild(descriptionList);
+		attendantPicBLock.appendChild(imageOfattendant);
+		attendantPicBLock.appendChild(attendantInfo);
+		attendantBlock.appendChild(attendantPicBLock);
+		allContainer.appendChild(attendantBlock);
+	}
+
+
+if (attendantIndex){
+	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/users", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			token: localStorage.getItem("authToken")
+		}
+	})
+		.then(res => res.json())
+		.then(data => {
+			if (data.rows) {
+				for (let index = 0; index < data.rows.length; index++) {
+					createAttendantPicture(data.rows[index], index);
 				}
 			}
 		})

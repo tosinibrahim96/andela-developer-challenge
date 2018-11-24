@@ -39,6 +39,13 @@ class Sale {
 			const salesInfoQuery =
 				"INSERT INTO salesinfo (price) VALUES ($1) returning *";
 			const salesInfoValues = [req.body.price];
+			const updateUserSale = "UPDATE users SET sales = sales + ($1) WHERE id = ($2)"
+			const updateUserSaleValues = [req.body.price,req.user.id];
+			try {
+				await db.query(updateUserSale, updateUserSaleValues);
+			} catch (error) {
+				console.log(res.status(400).send({ Error: error }));
+			}
 			try {
 				const createdSalesInfo = await db.query(
 					salesInfoQuery,
@@ -61,7 +68,7 @@ class Sale {
 						req.user.id
 					];
 					let createdSalesItem = await db.query(
-						salesItemsQuery,
+							salesItemsQuery,
 						salesItemValues
 					);
 					resultArray.push(createdSalesItem.rows[0]);
@@ -77,7 +84,7 @@ class Sale {
 
 	static async getAllSales(req, res) {
 		const userRole = req.user.role;
-		// if (userRole === "admin") {
+		if (userRole === "admin") {
 			const salesByAttendant =
 				"select email,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id";
 			const salesByProductName =
@@ -92,8 +99,8 @@ class Sale {
 				}
 				return res.status(200).send({ Sales_Info: attendantSale.rows });
 			} catch (error) {
-			// 	return res.status(400).send({ error });
-			// }
+				return res.status(400).send({ error });
+			}
 		}
 		return res.status(401).send({ Message: "Unauthorised Action" });
 	}
