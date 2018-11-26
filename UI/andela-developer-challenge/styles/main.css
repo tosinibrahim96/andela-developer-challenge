@@ -301,6 +301,7 @@ top: -10px;
 .down-info-container {
 	margin-top: 0.5em;
 	display: flex;
+	flex-wrap: wrap;
 	padding-bottom: 2em;
 	justify-content: space-between;
 	position: relative;

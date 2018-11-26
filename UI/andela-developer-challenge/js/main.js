@@ -20,8 +20,8 @@ const attendantMail = document.getElementById("attendant-mail");
 const attendantPassword = document.getElementById("attendant-password");
 const addAttendantForm = document.querySelector(".add-attendant");
 const attendantName = document.getElementById("attendant-name");
-const attendantContact = document.getElementById('attendant-mobile');
-const attendantImage = document.getElementById('attendant-img');
+const attendantContact = document.getElementById("attendant-mobile");
+const attendantImage = document.getElementById("attendant-img");
 const categoryDropdown = document.getElementById("category-dropdown");
 let defaultOption = document.createElement("option");
 const productName = document.getElementById("product-name");
@@ -35,6 +35,7 @@ const categoryIndex = document.querySelector(".category-index");
 const productIndex = document.querySelector(".product-index");
 const attendantIndex = document.querySelector(".attendant-index");
 const salesIndex = document.querySelector(".sales-information");
+const adminIndex = document.querySelector(".admin-right");
 
 
 $(document).ready(() => {
@@ -168,8 +169,6 @@ if (addAttendantForm) {
 	});
 }
 
-
-
 if (categoryDropdown) {
 	(() => {
 		categoryDropdown.length = 0;
@@ -204,7 +203,7 @@ if (categoryDropdown) {
 }
 
 if (addProductForm) {
-	console.log(productName.value,productImage.value);
+	console.log(productName.value, productImage.value);
 	addProductForm.addEventListener("submit", event => {
 		fetch("https://andela-developer-challenge.herokuapp.com/api/v1/products/", {
 			method: "POST",
@@ -218,7 +217,7 @@ if (addProductForm) {
 				price: productPrice.value,
 				quantity: productQuantity.value,
 				description: productDescription.value,
-				image_url:productImage.value
+				image_url: productImage.value
 			})
 		})
 			.then(res => res.json())
@@ -383,8 +382,7 @@ if (categoryIndex) {
 		.catch(error => console.log(error));
 }
 
-const createProductPicture = (data,index) =>{
-
+const createProductPicture = (data, index) => {
 	const productBlock = document.createElement("div");
 	const productPicBLock = document.createElement("div");
 	const imageOfProduct = document.createElement("img");
@@ -400,9 +398,8 @@ const createProductPicture = (data,index) =>{
 	productInfo.classList.add("info");
 	descriptionList.classList.add("description", "description-list");
 	titleText.classList.add("title");
-	deleteButton.classList.add('delete');
-	editButton.classList.add('edit');
-
+	deleteButton.classList.add("delete");
+	editButton.classList.add("edit");
 
 	titleText.innerText = data.product_name;
 	imageOfProduct.alt = "Product Image";
@@ -417,7 +414,7 @@ const createProductPicture = (data,index) =>{
 			categoryText.innerHTML = "Category:";
 			spanElement.classList.add("span-one");
 			spanElement.innerHTML = data.category_name;
-			
+
 			productList.appendChild(categoryText);
 			productList.appendChild(spanElement);
 			descriptionList.appendChild(productList);
@@ -438,8 +435,8 @@ const createProductPicture = (data,index) =>{
 			productList.appendChild(spanElement);
 			descriptionList.appendChild(productList);
 		} else if (index == 3) {
-			deleteButton.innerText = 'Delete';
-			editButton.innerText = 'Edit';
+			deleteButton.innerText = "Delete";
+			editButton.innerText = "Edit";
 			productList.appendChild(deleteButton);
 			productList.appendChild(editButton);
 			descriptionList.appendChild(productList);
@@ -452,10 +449,7 @@ const createProductPicture = (data,index) =>{
 	productPicBLock.appendChild(productInfo);
 	productBlock.appendChild(productPicBLock);
 	allContainer.appendChild(productBlock);
-}
-
-
-
+};
 
 if (productIndex) {
 	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/products/", {
@@ -476,76 +470,72 @@ if (productIndex) {
 		.catch(error => console.log(error));
 }
 
+const createAttendantPicture = (data, index) => {
+	const attendantBlock = document.createElement("div");
+	const attendantPicBLock = document.createElement("div");
+	const imageOfattendant = document.createElement("img");
+	const attendantInfo = document.createElement("div");
+	const titleText = document.createElement("h6");
+	const descriptionList = document.createElement("ul");
+	const deleteButton = document.createElement("button");
+	const editButton = document.createElement("button");
+	const allContainer = document.querySelector(".attendant-info-container");
 
-const createAttendantPicture = (data,index)=>{
+	attendantBlock.classList.add("attendant-product-block");
+	attendantPicBLock.classList.add("pic-block", "product-pic-block", "att-info");
+	attendantInfo.classList.add("info");
+	descriptionList.classList.add("description", "description-list");
+	titleText.classList.add("title");
+	deleteButton.classList.add("delete");
+	editButton.classList.add("edit");
 
-		const attendantBlock = document.createElement("div");
-		const attendantPicBLock = document.createElement("div");
-		const imageOfattendant = document.createElement("img");
-		const attendantInfo = document.createElement("div");
-		const titleText = document.createElement("h6");
-		const descriptionList = document.createElement("ul");
-		const deleteButton = document.createElement("button");
-		const editButton = document.createElement("button");
-		const allContainer = document.querySelector(".attendant-info-container");
+	titleText.innerText = data.first_name;
+	imageOfattendant.alt = "Attendant Image";
+	imageOfattendant.src = data.image_url;
 
-		attendantBlock.classList.add("attendant-product-block");
-		attendantPicBLock.classList.add("pic-block", "product-pic-block", "att-info");
-		attendantInfo.classList.add("info");
-		descriptionList.classList.add("description", "description-list");
-		titleText.classList.add("title");
-		deleteButton.classList.add('delete');
-		editButton.classList.add('edit');
+	for (let index = 0; index < 4; index++) {
+		const attendantList = document.createElement("li");
+		const spanElement = document.createElement("span");
 
-
-		titleText.innerText = data.first_name;
-		imageOfattendant.alt = "Attendant Image";
-		imageOfattendant.src = data.image_url;
-
-		for (let index = 0; index < 4; index++) {
-			const attendantList = document.createElement("li");
-			const spanElement = document.createElement("span");
-
-			if (index == 0) {
-				const mailText = document.createElement("strong");
-				mailText.innerHTML = "Mail:";
-				spanElement.innerHTML = data.email;
-				attendantList.appendChild(mailText);
-				attendantList.appendChild(spanElement);
-				descriptionList.appendChild(attendantList);
-			} else if (index == 1) {
-				const mobileText = document.createElement("strong");
-				spanElement.innerHTML = data.mobile_number;
-				mobileText.innerHTML = "Contact:";
-				attendantList.appendChild(mobileText);
-				attendantList.appendChild(spanElement);
-				descriptionList.appendChild(attendantList);
-			} else if (index == 2) {
-				const salesText = document.createElement("strong");
-				spanElement.innerHTML = `$ ${data.sales}`;
-				salesText.innerHTML = "Sales:";
-				attendantList.appendChild(salesText);
-				attendantList.appendChild(spanElement);
-				descriptionList.appendChild(attendantList);
-			} else if (index == 3) {
-				deleteButton.innerText = 'Delete';
-				editButton.innerText = 'Edit';
-				attendantList.appendChild(deleteButton);
-				attendantList.appendChild(editButton);
-				descriptionList.appendChild(attendantList);
-			}
+		if (index == 0) {
+			const mailText = document.createElement("strong");
+			mailText.innerHTML = "Mail:";
+			spanElement.innerHTML = data.email;
+			attendantList.appendChild(mailText);
+			attendantList.appendChild(spanElement);
+			descriptionList.appendChild(attendantList);
+		} else if (index == 1) {
+			const mobileText = document.createElement("strong");
+			spanElement.innerHTML = data.mobile_number;
+			mobileText.innerHTML = "Contact:";
+			attendantList.appendChild(mobileText);
+			attendantList.appendChild(spanElement);
+			descriptionList.appendChild(attendantList);
+		} else if (index == 2) {
+			const salesText = document.createElement("strong");
+			spanElement.innerHTML = `$ ${data.sales}`;
+			salesText.innerHTML = "Sales:";
+			attendantList.appendChild(salesText);
+			attendantList.appendChild(spanElement);
+			descriptionList.appendChild(attendantList);
+		} else if (index == 3) {
+			deleteButton.innerText = "Delete";
+			editButton.innerText = "Edit";
+			attendantList.appendChild(deleteButton);
+			attendantList.appendChild(editButton);
+			descriptionList.appendChild(attendantList);
 		}
-
-		attendantInfo.appendChild(titleText);
-		attendantInfo.appendChild(descriptionList);
-		attendantPicBLock.appendChild(imageOfattendant);
-		attendantPicBLock.appendChild(attendantInfo);
-		attendantBlock.appendChild(attendantPicBLock);
-		allContainer.appendChild(attendantBlock);
 	}
 
+	attendantInfo.appendChild(titleText);
+	attendantInfo.appendChild(descriptionList);
+	attendantPicBLock.appendChild(imageOfattendant);
+	attendantPicBLock.appendChild(attendantInfo);
+	attendantBlock.appendChild(attendantPicBLock);
+	allContainer.appendChild(attendantBlock);
+};
 
-if (attendantIndex){
+if (attendantIndex) {
 	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/users", {
 		method: "GET",
 		headers: {
@@ -564,22 +554,47 @@ if (attendantIndex){
 		.catch(error => console.log(error));
 }
 
-const createSalesTable = (data)=>{
-	
-	const tablerow = document.createElement('tr')
-	const nameColumn = document.createElement('td')
-	const productColumn = document.createElement('td')
-	const categoryColumn = document.createElement('td')
-	const quantityColumn = document.createElement('td')
-	const priceColumn = document.createElement('td')
-	const operationColumn = document.createElement('td') 
+const createSalesImage = (cat_name, cat_image) => {
+	const infoBlock = document.createElement("div");
+	const picBlock = document.createElement("div");
+	const catPic = document.createElement("img");
+	const picDescription = document.createElement("div");
+	const descriptionList = document.createElement("ul");
+	const descriptionStrong = document.createElement("strong");
+	const categoryName = document.createElement("li");
+	const allContainer = document.querySelector(".attendant-info-container");
+
+	infoBlock.classList.add("attendant-info-block");
+	picBlock.classList.add("pic-block");
+	catPic.alt = "Product Image";
+	catPic.src = cat_image;
+	picDescription.classList.add("pic-description");
+	descriptionList.classList.add("description-list");
+	categoryName.append(cat_name);
+	descriptionStrong.append(categoryName);
+	descriptionList.append(descriptionStrong);
+	picDescription.appendChild(descriptionList);
+	picBlock.appendChild(catPic);
+	infoBlock.appendChild(picBlock);
+	infoBlock.appendChild(picDescription);	
+	allContainer.appendChild(infoBlock);
+};
+
+const createSalesTable = data => {
+	const tablerow = document.createElement("tr");
+	const nameColumn = document.createElement("td");
+	const productColumn = document.createElement("td");
+	const categoryColumn = document.createElement("td");
+	const quantityColumn = document.createElement("td");
+	const priceColumn = document.createElement("td");
+	const operationColumn = document.createElement("td");
 	const deleteButton = document.createElement("button");
 	const editButton = document.createElement("button");
-	
-	deleteButton.classList.add('delete');
-	editButton.classList.add('edit');
-	deleteButton.innerText = 'Delete';
-	editButton.innerText = 'Edit';
+
+	deleteButton.classList.add("delete");
+	editButton.classList.add("edit");
+	deleteButton.innerText = "Delete";
+	editButton.innerText = "Edit";
 
 	nameColumn.append(data.first_name);
 	productColumn.append(data.product_name);
@@ -596,11 +611,10 @@ const createSalesTable = (data)=>{
 	tablerow.appendChild(priceColumn);
 	tablerow.appendChild(operationColumn);
 	salesIndex.appendChild(tablerow);
-}
+};
 
-
-
-fetch("https://andela-developer-challenge.herokuapp.com/api/v1/sales/", {
+if (salesIndex) {
+	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/sales/", {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
@@ -609,13 +623,78 @@ fetch("https://andela-developer-challenge.herokuapp.com/api/v1/sales/", {
 	})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data);
+			const catName = [];
 			if (data.attendantSale) {
+				//Here we want to get the images of categories.
 				for (let index = 0; index < data.attendantSale.rows.length; index++) {
+					if (!catName.includes(data.attendantSale.rows[index].category_name)) {
+						catName.push(data.attendantSale.rows[index].category_name);
+						createSalesImage(data.attendantSale.rows[index].category_name, data.attendantSale.rows[index].category_image);
+					}
 					createSalesTable(data.attendantSale.rows[index]);
 				}
-				
+			}
+		})
+		.catch(error => console.log(error));
+}
+
+
+const createAdminProducts = (data, index)=> {
+	const infoBlock = document.createElement("div");
+	const picBlock = document.createElement("div");
+	const catPic = document.createElement("img");
+	const infoBlockContent = document.createElement("div");
+	const amountInStock = document.createElement("h3");
+	const stockValue = document.createElement("p");
+	const infoFooter = document.createElement("div");
+	const footerParagraph = document.createElement("p");
+	const footerSpan = document.createElement("span");
+	const allContainer = document.querySelector(".up-info-container");
+
+	infoBlock.classList.add("info-block");
+	picBlock.classList.add("info-block-header", "info-block-header3");
+	infoBlockContent.classList.add("info-block-content");
+	infoFooter.classList.add("info-block-footer");
+	footerSpan.classList.add("date");
+
+	catPic.src = data.product_image_url;
+	catPic.alt = "Product Image";
+	picBlock.append(catPic);
+	amountInStock.append("Amount in Stock");
+	stockValue.append(data.product_quantity);
+	infoBlockContent.append(amountInStock);
+	infoBlockContent.append(stockValue);
+	footerSpan.append(data.product_name)
+	footerParagraph.append("Product Name");
+	footerParagraph.append(footerSpan);
+	infoFooter.append(footerParagraph);
+	infoBlock.append(picBlock);
+	infoBlock.append(infoBlockContent);
+	infoBlock.append(infoFooter);
+	allContainer.appendChild(infoBlock);
+}
+
+
+
+if(adminIndex){
+
+	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/products/", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			token: localStorage.getItem("authToken")
+		}
+	})
+		.then(res => res.json())
+		.then(data => {
+			if (data.rows) {
+				for (let index = 0; index < data.rows.length; index++) {
+					createAdminProducts(data.rows[index], index);
+				}
 			}
 		})
 		.catch(error => console.log(error));
 
+	
+	
+}

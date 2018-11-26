@@ -83,7 +83,7 @@ class Sale {
 		if (userRole === "admin") {
 			const salesByAttendant = "select email,first_name,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id";
 			const salesByProductName = "select name,cat_id FROM products inner join salesitems on products.id = salesitems.product_id";
-			const selectCategoryName = "select name from categories where id = ($1)";
+			const selectCategoryName = "select name,image_url from categories where id = ($1)";
 
 			try {
 				const attendantSale = await _conn2.default.query(salesByAttendant);
@@ -94,6 +94,7 @@ class Sale {
 					attendantSale.rows[index].product_name = productNameSale.rows[index].name;
 					const categoryName = await _conn2.default.query(selectCategoryName, [productNameSale.rows[index].cat_id]);
 					attendantSale.rows[index].category_name = categoryName.rows[0].name;
+					attendantSale.rows[index].category_image = categoryName.rows[0].image_url;
 				}
 				return res.status(200).send({ attendantSale });
 			} catch (error) {
