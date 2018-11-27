@@ -111,20 +111,14 @@ class Product {
 
 	static async deleteProduct(req, res) {
 		const userRole = req.user.role;
-		// fetch the request data
-		const data = req.body;
-		const result = _Helper2.default.validateProduct(data);
 		if (userRole === "admin") {
-			if (result.error) {
-				return _Helper2.default.invalidDataMsg(res, result.error);
-			}
-			const findProduct = "SELECT * FROM products WHERE id=$1 AND cat_id=$2";
+			const findProduct = "SELECT * FROM products WHERE id=$1";
 			const deleteProduct = `DELETE FROM products
       WHERE id=$1`;
 			try {
-				const { rows } = await _conn2.default.query(findProduct, [req.params.id, parseInt(req.body.category_id, 10)]);
+				const { rows } = await _conn2.default.query(findProduct, [req.params.id]);
 				if (!rows[0]) {
-					res.status(400).send({ message: "The Product not in this category" });
+					res.status(400).send({ message: "The Product does not exist" });
 					return;
 				}
 				const values = [req.params.id];

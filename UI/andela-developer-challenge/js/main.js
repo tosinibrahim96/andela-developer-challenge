@@ -204,21 +204,24 @@ if (categoryDropdown) {
 
 if (addProductForm) {
 	addProductForm.addEventListener("submit", event => {
-		fetch("https://andela-developer-challenge.herokuapp.com/api/v1/products/", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				token: localStorage.getItem("authToken")
-			},
-			body: JSON.stringify({
-				name: productName.value,
-				category_id: categoryDropdown.value,
-				price: productPrice.value,
-				quantity: productQuantity.value,
-				description: productDescription.value,
-				image_url: productImage.value
-			})
-		})
+		fetch(
+			"https://andela-developer-challenge.herokuapp.com/api/v1/products/",
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					token: localStorage.getItem("authToken")
+				},
+				body: JSON.stringify({
+					name: productName.value,
+					category_id: categoryDropdown.value,
+					price: productPrice.value,
+					quantity: productQuantity.value,
+					description: productDescription.value,
+					image_url: productImage.value
+				})
+			}
+		)
 			.then(res => res.json())
 			.then(data => {
 				if (data.rows) {
@@ -436,6 +439,7 @@ const createProductPicture = (data, index) => {
 	const deleteButton = document.createElement("button");
 	const editButton = document.createElement("button");
 	const allContainer = document.querySelector(".attendant-info-container");
+	const identifier = document.createElement('input');
 
 	productBlock.classList.add("attendant-product-block");
 	productPicBLock.classList.add("pic-block", "product-pic-block");
@@ -448,6 +452,8 @@ const createProductPicture = (data, index) => {
 	titleText.innerText = data.product_name;
 	imageOfProduct.alt = "Product Image";
 	imageOfProduct.src = data.product_image_url;
+	identifier.value = data.product_id;
+	identifier.style.display="none";
 
 	for (let index = 0; index < 4; index++) {
 		const productList = document.createElement("li");
@@ -481,6 +487,7 @@ const createProductPicture = (data, index) => {
 		} else if (index == 3) {
 			deleteButton.innerText = "Delete";
 			editButton.innerText = "Edit";
+			deleteButton.appendChild(identifier);
 			productList.appendChild(deleteButton);
 			productList.appendChild(editButton);
 			descriptionList.appendChild(productList);
@@ -495,7 +502,29 @@ const createProductPicture = (data, index) => {
 	allContainer.appendChild(productBlock);
 };
 
+const deleteAProduct = (id)=>{
+	fetch(
+		`https://andela-developer-challenge.herokuapp.com/api/v1/products/${id}`,
+		{
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				token: localStorage.getItem("authToken")
+			}
+		}
+	)
+		.then(res => res.json())
+		.then(data => {
+			if (data.Message == "Product deleted successfuly") {
+				location.reload();
+			}
+		})
+		.catch(error => console.log(error));
+}
+
 if (productIndex) {
+	const modalIdentifier = document.getElementById("modal-identifier");
+	modalIdentifier.style.display = "none";
 	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/products/", {
 		method: "GET",
 		headers: {
@@ -509,6 +538,21 @@ if (productIndex) {
 				for (let index = 0; index < data.rows.length; index++) {
 					createProductPicture(data.rows[index], index);
 				}
+				$(".delete").click(function() {
+					// Get the value of textbox inside d delete button clicked
+					$(".deleteModal").fadeIn(200);
+					modalIdentifier.value = this.children[0].value;
+				});
+
+				$(".closeModal").click(function() {
+					$(".deleteModal").hide("fast");
+				});
+				$(".close").click(function() {
+					$(".deleteModal").hide("fast");
+				});
+				$(".modal-delete").click(function() {
+					deleteAProduct(modalIdentifier.value);
+				});
 			}
 		})
 		.catch(error => console.log(error));
