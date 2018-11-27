@@ -7,6 +7,9 @@ const router = express.Router();
 // get all users
 router.get('/api/v1/users', Auth.verifyToken, userController.getAllUsers);
 
+//delete a user
+router.delete('/api/v1/users/:id', Auth.verifyToken, userController.deleteUser);
+
 // add a user
 router.post('/api/v1/auth/signup', Auth.verifyToken, userController.create);
 

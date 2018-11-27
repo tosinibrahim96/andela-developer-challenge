@@ -19,6 +19,9 @@ const router = _express2.default.Router();
 // get all users
 router.get('/api/v1/users', _Auth2.default.verifyToken, _User2.default.getAllUsers);
 
+//delete a user
+router.delete('/api/v1/users/:id', _Auth2.default.verifyToken, _User2.default.deleteUser);
+
 // add a user
 router.post('/api/v1/auth/signup', _Auth2.default.verifyToken, _User2.default.create);
 

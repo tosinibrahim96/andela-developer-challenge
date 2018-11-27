@@ -567,6 +567,7 @@ const createAttendantPicture = (data, index) => {
 	const descriptionList = document.createElement("ul");
 	const deleteButton = document.createElement("button");
 	const editButton = document.createElement("button");
+	const identifier = document.createElement("input");
 	const allContainer = document.querySelector(".attendant-info-container");
 
 	attendantBlock.classList.add("attendant-product-block");
@@ -577,6 +578,8 @@ const createAttendantPicture = (data, index) => {
 	deleteButton.classList.add("delete");
 	editButton.classList.add("edit");
 
+	identifier.value = data.id;
+	identifier.style.display = "none";
 	titleText.innerText = data.first_name;
 	imageOfattendant.alt = "Attendant Image";
 	imageOfattendant.src = data.image_url;
@@ -609,6 +612,7 @@ const createAttendantPicture = (data, index) => {
 		} else if (index == 3) {
 			deleteButton.innerText = "Delete";
 			editButton.innerText = "Edit";
+			deleteButton.appendChild(identifier);
 			attendantList.appendChild(deleteButton);
 			attendantList.appendChild(editButton);
 			descriptionList.appendChild(attendantList);
@@ -623,7 +627,30 @@ const createAttendantPicture = (data, index) => {
 	allContainer.appendChild(attendantBlock);
 };
 
+const deleteAttendant = (id)=>{
+	fetch(
+		`https://andela-developer-challenge.herokuapp.com/api/v1/users/${id}`,
+		{
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				token: localStorage.getItem("authToken")
+			}
+		}
+	)
+		.then(res => res.json())
+		.then(data => {
+			if (data.Message == "User deleted successfuly") {
+				location.reload();
+			}
+		})
+		.catch(error => console.log(error));
+}
+
+
 if (attendantIndex) {
+	const modalIdentifier = document.getElementById("modal-identifier");
+	modalIdentifier.style.display = "none";
 	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/users", {
 		method: "GET",
 		headers: {
@@ -637,6 +664,21 @@ if (attendantIndex) {
 				for (let index = 0; index < data.rows.length; index++) {
 					createAttendantPicture(data.rows[index], index);
 				}
+				$(".delete").click(function() {
+					// Get the value of textbox inside d delete button clicked
+					$(".deleteModal").fadeIn(200);
+					modalIdentifier.value = this.children[0].value;
+				});
+
+				$(".closeModal").click(function() {
+					$(".deleteModal").hide("fast");
+				});
+				$(".close").click(function() {
+					$(".deleteModal").hide("fast");
+				});
+				$(".modal-delete").click(function() {
+					deleteAttendant(modalIdentifier.value);
+				});
 			}
 		})
 		.catch(error => console.log(error));

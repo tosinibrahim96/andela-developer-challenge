@@ -61,6 +61,28 @@ class User {
     return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 
+  static async deleteUser(req, res) {
+    const userRole = req.user.role;
+    // fetch the request data
+    if (userRole === "admin") {
+      const findUSer = "SELECT * FROM users WHERE id = $1";
+      const deleteUser = "DELETE FROM users WHERE id=$1";
+      try {
+        const { rows } = await _conn2.default.query(findUSer, [req.params.id]);
+        if (!rows[0]) {
+          res.status(400).send({ message: "The User does not exist" });
+          return;
+        }
+        const values = [req.params.id];
+        await _conn2.default.query(deleteUser, values);
+        return res.status(200).send({ Message: "User deleted successfuly" });
+      } catch (err) {
+        return res.status(400).send(err);
+      }
+    }
+    return res.status(401).send({ Message: "Unauthorised Action" });
+  }
+
   /**
    * Login
    */

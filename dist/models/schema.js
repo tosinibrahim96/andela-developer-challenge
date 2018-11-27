@@ -1,9 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _bcrypt = require('bcrypt');
 
 var _bcrypt2 = _interopRequireDefault(_bcrypt);
@@ -65,14 +61,14 @@ const pword = _bcrypt2.default.hashSync('111111', _bcrypt2.default.genSaltSync()
 
 // const addImage= `ALTER TABLE products
 // ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT('https://i.imgur.com/S3LYe5b.jpg');`;
-// const addAdmin = ` INSERT INTO users(email, password,role) 
-// VALUES ('admin@mail.com', '${pword}' ,'admin');`;
+const addAdmin = ` INSERT INTO users(email, password,role) 
+VALUES ('admin@mail.com', '${pword}' ,'admin');`;
 
-const alterUsers = `ALTER TABLE users 
-ADD COLUMN first_name VARCHAR(150) NOT NULL DEFAULT ('John Doe'),
-ADD COLUMN mobile_number VARCHAR(20) NOT NULL DEFAULT ('08076543241'),
-ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://i.imgur.com/27DUH5b.jpg'),
-ADD COLUMN sales INTEGER NOT NULL DEFAULT (0);`;
+// const alterUsers = `ALTER TABLE users 
+// ADD COLUMN first_name VARCHAR(150) NOT NULL DEFAULT ('John Doe'),
+// ADD COLUMN mobile_number VARCHAR(20) NOT NULL DEFAULT ('08076543241'),
+// ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://i.imgur.com/27DUH5b.jpg'),
+// ADD COLUMN sales INTEGER NOT NULL DEFAULT (0);`;
 
-const tables = `${alterUsers}`;
-exports.default = tables;
+// const tables = `${addAdmin}`;
+// export default tables;

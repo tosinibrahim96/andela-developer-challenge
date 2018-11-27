@@ -55,14 +55,14 @@ const pword = bcrypt.hashSync('111111', bcrypt.genSaltSync());
 
 // const addImage= `ALTER TABLE products
 // ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT('https://i.imgur.com/S3LYe5b.jpg');`;
-// const addAdmin = ` INSERT INTO users(email, password,role) 
-// VALUES ('admin@mail.com', '${pword}' ,'admin');`;
+const addAdmin = ` INSERT INTO users(email, password,role) 
+VALUES ('admin@mail.com', '${pword}' ,'admin');`;
 
-const alterUsers = `ALTER TABLE users 
-ADD COLUMN first_name VARCHAR(150) NOT NULL DEFAULT ('John Doe'),
-ADD COLUMN mobile_number VARCHAR(20) NOT NULL DEFAULT ('08076543241'),
-ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://i.imgur.com/27DUH5b.jpg'),
-ADD COLUMN sales INTEGER NOT NULL DEFAULT (0);`;
+// const alterUsers = `ALTER TABLE users 
+// ADD COLUMN first_name VARCHAR(150) NOT NULL DEFAULT ('John Doe'),
+// ADD COLUMN mobile_number VARCHAR(20) NOT NULL DEFAULT ('08076543241'),
+// ADD COLUMN image_url VARCHAR(150) NOT NULL DEFAULT ('https://i.imgur.com/27DUH5b.jpg'),
+// ADD COLUMN sales INTEGER NOT NULL DEFAULT (0);`;
 
-const tables = `${alterUsers}`;
-export default tables;
+// const tables = `${addAdmin}`;
+// export default tables;
