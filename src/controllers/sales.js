@@ -85,8 +85,7 @@ class Sale {
 	static async getAllSales(req, res) {
 		const userRole = req.user.role;
 		if (userRole === "admin") {
-			const salesByAttendant =
-				"select email,first_name,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id";
+			const salesByAttendant = "select salesitems.id,email,first_name,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id";
 			const salesByProductName =
 				"select name,cat_id FROM products inner join salesitems on products.id = salesitems.product_id";
 				const selectCategoryName = "select name,image_url from categories where id = ($1)";
@@ -113,7 +112,7 @@ class Sale {
 
 	static async deleteSale(req, res) {		
 		const userRole = req.user.role;
-		// if (userRole === 'admin') {
+		if (userRole === 'admin') {
 			const text = "DELETE FROM salesitems WHERE id = $1";
 			try {
 				const result = await db.query(text, [req.params.id]);
@@ -128,7 +127,7 @@ class Sale {
 			} catch (error) {
 				return res.status(400).send(error);
 			}
-		// } return res.status(401).send({ Message: 'Unauthorised Action' });
+		} return res.status(401).send({ Message: 'Unauthorised Action' });
 	}
 }
 

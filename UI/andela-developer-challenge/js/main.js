@@ -720,11 +720,15 @@ const createSalesTable = data => {
 	const operationColumn = document.createElement("td");
 	const deleteButton = document.createElement("button");
 	const editButton = document.createElement("button");
+	const identifier = document.createElement("input");
 
+	identifier.value = data.id;
+	identifier.style.display = "none";
 	deleteButton.classList.add("delete");
 	editButton.classList.add("edit");
 	deleteButton.innerText = "Delete";
 	editButton.innerText = "Edit";
+	deleteButton.appendChild(identifier);
 
 	nameColumn.append(data.first_name);
 	productColumn.append(data.product_name);
@@ -743,7 +747,30 @@ const createSalesTable = data => {
 	salesIndex.appendChild(tablerow);
 };
 
+const deleteSale = (id)=>{
+	fetch(
+		`https://andela-developer-challenge.herokuapp.com/api/v1/sales/${id}`,
+		{
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				token: localStorage.getItem("authToken")
+			}
+		}
+	)
+		.then(res => res.json())
+		.then(data => {
+			if (data.Message == "Record deleted successfully") {
+				location.reload();
+			}
+		})
+		.catch(error => console.log(error));
+}
+
+
 if (salesIndex) {
+	const modalIdentifier = document.getElementById("modal-identifier");
+	modalIdentifier.style.display = "none";
 	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/sales/", {
 		method: "GET",
 		headers: {
@@ -763,6 +790,21 @@ if (salesIndex) {
 					}
 					createSalesTable(data.attendantSale.rows[index]);
 				}
+				$(".delete").click(function() {
+					// Get the value of textbox inside d delete button clicked
+					$(".deleteModal").fadeIn(200);
+					modalIdentifier.value = this.children[0].value;
+				});
+
+				$(".closeModal").click(function() {
+					$(".deleteModal").hide("fast");
+				});
+				$(".close").click(function() {
+					$(".deleteModal").hide("fast");
+				});
+				$(".modal-delete").click(function() {
+					deleteSale(modalIdentifier.value);
+				});
 			}
 		})
 		.catch(error => console.log(error));
