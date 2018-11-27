@@ -7,7 +7,13 @@ const router = express.Router();
 // get all categories
 router.get('/api/v1/categories/', Auth.verifyToken, categoryController.getAllCategories);
 
+// get a categories
+router.get('/api/v1/categories/:id', Auth.verifyToken, categoryController.getCategory);
+
 // add a category
 router.post('/api/v1/categories/', Auth.verifyToken, categoryController.create);
+
+// delete a category
+router.delete('/api/v1/categories/:id', Auth.verifyToken, categoryController.deleteCategory);
 
 module.exports = router;

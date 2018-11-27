@@ -19,7 +19,13 @@ const router = _express2.default.Router();
 // get all categories
 router.get('/api/v1/categories/', _Auth2.default.verifyToken, _Categories2.default.getAllCategories);
 
+// get a categories
+router.get('/api/v1/categories/:id', _Auth2.default.verifyToken, _Categories2.default.getCategory);
+
 // add a category
 router.post('/api/v1/categories/', _Auth2.default.verifyToken, _Categories2.default.create);
+
+// delete a category
+router.delete('/api/v1/categories/:id', _Auth2.default.verifyToken, _Categories2.default.deleteCategory);
 
 module.exports = router;

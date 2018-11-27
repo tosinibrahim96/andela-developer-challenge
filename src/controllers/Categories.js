@@ -41,6 +41,52 @@ class Category {
     }
     return res.status(401).send({ Message: 'Unauthorised Action' });
   }
+
+  static async getCategory(req, res){
+    const userRole = req.user.role;
+
+    if (userRole === "admin") {
+      const findCategory = "SELECT * FROM categories WHERE id = $1";
+      
+      try {
+        const { rows } = await db.query(findCategory, [req.params.id]);
+        if (!rows[0]) {
+          res.status(400).send({ message: "The Category does not exist" });
+          return;
+        }else{
+          return res.status(200).send({ rows});
+        }
+      } catch (err) {
+        return res.status(400).send(err);
+      }
+    }
+    return res.status(401).send({ Message: "Unauthorised Action" });
+  }
+
+
+
+
+  static async deleteCategory(req, res) {
+    const userRole = req.user.role;
+    // fetch the request data
+    if (userRole === "admin") {
+      const findCategory = "SELECT * FROM categories WHERE id = $1";
+      const deleteCategory = "DELETE FROM categories WHERE id=$1";
+      try {
+        const { rows } = await db.query(findCategory, [req.params.id]);
+        if (!rows[0]) {
+          res.status(400).send({ message: "The Category does not exist" });
+          return;
+        }
+        const values = [req.params.id];
+        await db.query(deleteCategory, values);
+        return res.status(200).send({ Message: "Category deleted successfuly" });
+      } catch (err) {
+        return res.status(400).send(err);
+      }
+    }
+    return res.status(401).send({ Message: "Unauthorised Action" });
+  }
 }
 
 

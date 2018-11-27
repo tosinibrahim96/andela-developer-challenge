@@ -823,13 +823,26 @@ button {
 	font-weight: 400;
 }
 
-.delete {
+.delete,.modal-delete {
 	background: #FF0A16;
 	color: #fefefe;
 	cursor: pointer;
 }
 
-.delete:hover {
+.modal-cancel{
+	background: #214b63;
+	color: #fefefe;
+	cursor: pointer;
+}
+
+.modal-cancel:hover{
+	background: #fefefe;
+	color: #214b63;
+	cursor: pointer;
+	border: 1px solid #214b63;
+}
+
+.delete:hover, .modal-delete:hover {
 	color: #ff6663;
 	background: #fefefe;
 	border: 1px solid #ff6663;
