@@ -13,6 +13,10 @@ router.get('/api/v1/categories/:id', Auth.verifyToken, categoryController.getCat
 // add a category
 router.post('/api/v1/categories/', Auth.verifyToken, categoryController.create);
 
+// update a category
+router.put('/api/v1/categories/:id', Auth.verifyToken, categoryController.updateCategory);
+
+
 // delete a category
 router.delete('/api/v1/categories/:id', Auth.verifyToken, categoryController.deleteCategory);
 

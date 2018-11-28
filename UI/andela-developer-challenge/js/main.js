@@ -36,7 +36,7 @@ const productIndex = document.querySelector(".product-index");
 const attendantIndex = document.querySelector(".attendant-index");
 const salesIndex = document.querySelector(".sales-information");
 const adminIndex = document.querySelector(".admin-right");
-
+const updateButton = document.getElementById("loginbutton");
 
 $(document).ready(() => {
 	let changed = $(".incr").html();
@@ -111,33 +111,7 @@ if (logoutButton) {
 		window.location = "/index.html";
 	});
 }
-if (addCategoryForm) {
-	addCategoryForm.addEventListener("submit", event => {
-		fetch(
-			"https://andela-developer-challenge.herokuapp.com/api/v1/categories/",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					token: localStorage.getItem("authToken")
-				},
-				body: JSON.stringify({
-					name: categoryName.value,
-					image_url: categoryImage.value,
-					description: categoryDescription.value
-				})
-			}
-		)
-			.then(res => res.json())
-			.then(data => {
-				if (data.rows) {
-					location.reload();
-				}
-			})
-			.catch(error => console.log(error));
-		event.preventDefault();
-	});
-}
+
 
 if (addAttendantForm) {
 	addAttendantForm.addEventListener("submit", event => {
@@ -338,7 +312,7 @@ const createCategoryPicture = data => {
 	const editButton = document.createElement("button");
 	const allContainer = document.querySelector(".attendant-info-container");
 	const identifier = document.createElement('input');
-	
+	const editIdentifier = document.createElement('input');
 
 	infoBlock.classList.add("attendant-info-block");
 	productPicBLock.classList.add("pic-block", "product-pic-block");
@@ -356,6 +330,8 @@ const createCategoryPicture = data => {
 	deleteButton.innerText = "Delete";
 	editButton.innerText = "Edit";
 	identifier.value = data.id;
+	editIdentifier.value= data.id;
+	editIdentifier.style.display="none";
 	identifier.style.display="none";
 
 	titleLink.appendChild(titleText);
@@ -367,8 +343,69 @@ const createCategoryPicture = data => {
 	productPicBLock.appendChild(catInfo);
 	infoBlock.appendChild(productPicBLock);
 	deleteButton.appendChild(identifier);
+	editButton.appendChild(editIdentifier);
 	allContainer.appendChild(infoBlock);
 };
+
+
+
+
+if (addCategoryForm) {
+	const updateIdentifier = document.getElementById("update-identifier");
+	addCategoryForm.addEventListener("submit", event => {
+		if (!updateIdentifier.value) {
+			fetch(
+				"https://andela-developer-challenge.herokuapp.com/api/v1/categories/",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						token: localStorage.getItem("authToken")
+					},
+					body: JSON.stringify({
+						name: categoryName.value,
+						image_url: categoryImage.value,
+						description: categoryDescription.value
+					})
+				}
+			)
+				.then(res => res.json())
+				.then(data => {
+					if (data.rows) {
+						location.reload();
+					}
+				})
+				.catch(error => console.log(error));
+		} else if (updateIdentifier.value) {
+			const id = updateIdentifier.value;
+			fetch(
+				`https://andela-developer-challenge.herokuapp.com/api/v1/categories/${id}`,
+				{
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						token: localStorage.getItem("authToken")
+					},
+					body: JSON.stringify({
+						name: categoryName.value,
+						image_url: categoryImage.value,
+						description: categoryDescription.value
+					})
+				}
+			)
+				.then(res => res.json())
+				.then(data => {
+					if (data.Message) {
+						location.reload();
+					}
+				})
+				.catch(error => console.log(error));
+		}
+		event.preventDefault();
+	});
+}
+
+
 
 
 const deleteACategory = (id)=>{
@@ -389,8 +426,32 @@ const deleteACategory = (id)=>{
 			.catch(error => console.log(error));
 }
 
+const getACategory = (id)=>{
+
+	fetch(
+		`https://andela-developer-challenge.herokuapp.com/api/v1/categories/${id}`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				token: localStorage.getItem("authToken")
+			}
+		}
+	)
+		.then(res => res.json())
+		.then(data => {
+			categoryName.value = data.rows[0].name;
+			categoryImage.value = data.rows[0].image_url;
+			categoryDescription.value = data.rows[0].short_desc;
+		})
+		.catch(error => console.log(error));
+}
+
+
 if (categoryIndex) {
 	const modalIdentifier = document.getElementById("modal-identifier");
+	const updateIdentifier = document.getElementById("update-identifier");
+	updateIdentifier.style.display= "none";
 	modalIdentifier.style.display = "none";
 	fetch(
 		"https://andela-developer-challenge.herokuapp.com/api/v1/categories/",
@@ -417,12 +478,39 @@ if (categoryIndex) {
 
 				$(".closeModal").click(function() {
 					$(".deleteModal").hide("fast");
+					categoryName.value = "";
+					categoryDescription.value = "";
+					categoryImage.value = "";
+					const modalTitle = document.querySelector(".category-title");
+					const updateButton = document.getElementById("loginbutton");
+					modalTitle.innerText = "Add New Category";
+					updateButton.value = "Add Category";
+					updateIdentifier.value = "";
 				});
 				$(".close").click(function() {
 					$(".deleteModal").hide("fast");
+					categoryName.value = "";
+					categoryDescription.value = "";
+					categoryImage.value = "";
+					const modalTitle = document.querySelector(".category-title");
+					const updateButton = document.getElementById("loginbutton");
+					modalTitle.innerText = "Add New Category";
+					updateButton.value = "Add Category";
+					updateIdentifier.value = "";
 				});
 				$(".modal-delete").click(function() {
 					deleteACategory(modalIdentifier.value);
+				});
+
+				$(".edit").click(function() {
+					updateIdentifier.value = this.children[0].value;
+					getACategory(updateIdentifier.value);
+					const modalTitle = document.querySelector(".category-title");
+					const updateButton = document.getElementById("loginbutton");
+					modalTitle.innerText = "Update Category";
+					updateButton.value = "Update Category";
+					// Get the value of textbox inside d delete button clicked
+					$(".updateModal").fadeIn(200);
 				});
 			}
 		})

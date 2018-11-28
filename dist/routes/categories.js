@@ -25,6 +25,9 @@ router.get('/api/v1/categories/:id', _Auth2.default.verifyToken, _Categories2.de
 // add a category
 router.post('/api/v1/categories/', _Auth2.default.verifyToken, _Categories2.default.create);
 
+// update a category
+router.put('/api/v1/categories/:id', _Auth2.default.verifyToken, _Categories2.default.updateCategory);
+
 // delete a category
 router.delete('/api/v1/categories/:id', _Auth2.default.verifyToken, _Categories2.default.deleteCategory);
 
