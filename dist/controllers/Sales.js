@@ -20,21 +20,37 @@ class Sale {
 
 	static async getSale(req, res) {
 		if (req.user.id != req.params.id) {
-			return res.status(404).send({ Error: "You do not have access to view these records" });
+			return res.status(400).send({ Error: "You do not have access to view these records" });
 		}
 		const userRole = req.user.role;
-		if (userRole === 'attendant') {
-			const text = "SELECT * FROM salesitems WHERE user_id = $1";
+		if (userRole === "attendant") {
+			const salesByAttendant = "select salesitems.id,email,first_name,product_id,sale_id,quantity,item_price,user_id FROM users inner join salesitems on users.id = salesitems.user_id WHERE users.id = $1";
+			const salesByProductName = "select name,cat_id,image_url FROM products inner join salesitems on products.id = salesitems.product_id";
+			const selectCategoryName = "select name,image_url from categories where id = ($1)";
+
 			try {
-				const { rows } = await _conn2.default.query(text, [req.params.id]);
-				if (!rows[0]) {
-					return _Helper2.default.noSalesRecord(res);
+				const attendantSale = await _conn2.default.query(salesByAttendant, [req.user.id]);
+				if (attendantSale.rowCount == 0) {
+					res.status(200).send({ message: "The User does not have any sales record" });
+					return;
 				}
-				return res.status(200).send({ rows });
+				const productNameSale = await _conn2.default.query(salesByProductName);
+
+				for (let index = 0; index < attendantSale.rows.length; index++) {
+					//for each sales object, add a product name, category name attribute 
+					attendantSale.rows[index].product_name = productNameSale.rows[index].name;
+					attendantSale.rows[index].product_image = productNameSale.rows[index].image_url;
+					const categoryName = await _conn2.default.query(selectCategoryName, [productNameSale.rows[index].cat_id]);
+					attendantSale.rows[index].category_name = categoryName.rows[0].name;
+					attendantSale.rows[index].category_image = categoryName.rows[0].image_url;
+				}
+				return res.status(200).send({ attendantSale });
 			} catch (error) {
-				return res.status(400).send(error);
+				console.log(error);
+				return res.status(400).send({ error });
 			}
-		}return res.status(401).send({ Message: 'Unauthorised Action' });
+		}
+		return res.status(401).send({ Message: "Unauthorised Action" });
 	}
 
 	static async createSales(req, res) {

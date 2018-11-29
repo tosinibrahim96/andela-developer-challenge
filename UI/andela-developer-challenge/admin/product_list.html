@@ -62,167 +62,7 @@
 					<i class="fas fa-plus"></i> add product
 				</button>
 				<div class="up-info-container attendant-info-container product-index">
-					<!-- <div class="attendant-product-block">
-						<div class="pic-block product-pic-block">
-							<img src="../images/p2.jpg" alt="product image" />
-							<div class="info">
-								<h6 class="title">Brown boots</h6>
-								<ul class="description description-list">
-									<li>
-										<strong>Category:</strong><span class="span-one">Shoe</span>
-									</li>
-									<li>
-										<strong>Quantity:</strong><span class="span-two">0</span>
-									</li>
-									<li>
-										<strong>Size:</strong><span class="span-three">35</span>
-									</li>
-									<li>
-										<strong>price:</strong><span class="span-four">$12</span>
-									</li>
-									<li>
-										<button class="delete">Delete</button
-										><button class="edit">Edit</button>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div> -->
-					<!-- info-block -->
-					<!-- <div class="attendant-product-block">
-						<div class="pic-block product-pic-block">
-							<img src="../images/p11.jpeg" alt="product image" />
-							<div class="info">
-								<h6 class="title">Rafia bags</h6>
-								<ul class="description description-list">
-									<li>
-										<strong>Category:</strong><span class="span-one">Shoe</span>
-									</li>
-									<li>
-										<strong>Quantity:</strong><span class="span-two">0</span>
-									</li>
-									<li>
-										<strong>Size:</strong><span class="span-three">35</span>
-									</li>
-									<li>
-										<strong>price:</strong><span class="span-four">$12</span>
-									</li>
-									<li>
-										<button class="delete">Delete</button
-										><button class="edit">Edit</button>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div> -->
-					<!-- info-block -->
-					<!-- <div class="attendant-product-block">
-						<div class="pic-block product-pic-block">
-							<img src="../images/p13.jpeg" alt="product image" />
-							<div class="info">
-								<h6 class="title">Diamond ring</h6>
-								<ul class="description description-list">
-									<li>
-										<strong>Category:</strong><span class="span-one">Shoe</span>
-									</li>
-									<li>
-										<strong>Quantity:</strong><span class="span-two">0</span>
-									</li>
-									<li>
-										<strong>Size:</strong><span class="span-three">35</span>
-									</li>
-									<li>
-										<strong>price:</strong><span class="span-four">$12</span>
-									</li>
-									<li>
-										<button class="delete">Delete</button
-										><button class="edit">Edit</button>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div> -->
-					<!-- info-block -->
-					<!-- <div class="attendant-product-block">
-						<div class="pic-block product-pic-block">
-							<img src="../images/p12.jpeg" alt="product image" />
-							<div class="info">
-								<h6 class="title">Coloured ties</h6>
-								<ul class="description description-list">
-									<li>
-										<strong>Category:</strong><span class="span-one">Shoe</span>
-									</li>
-									<li>
-										<strong>Quantity:</strong><span class="span-two">0</span>
-									</li>
-									<li>
-										<strong>Size:</strong><span class="span-three">35</span>
-									</li>
-									<li>
-										<strong>price:</strong><span class="span-four">$12</span>
-									</li>
-									<li>
-										<button class="delete">Delete</button
-										><button class="edit">Edit</button>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div> -->
-					<!-- info-block -->
-					<!-- <div class="attendant-product-block">
-						<div class="pic-block product-pic-block">
-							<img src="../images/p9.jpeg" alt="product image" />
-							<div class="info">
-								<h6 class="title">Red Shirts</h6>
-								<ul class="description description-list">
-									<li>
-										<strong>Category:</strong><span class="span-one">Shoe</span>
-									</li>
-									<li>
-										<strong>Quantity:</strong><span class="span-two">0</span>
-									</li>
-									<li>
-										<strong>Size:</strong><span class="span-three">35</span>
-									</li>
-									<li>
-										<strong>price:</strong><span class="span-four">$12</span>
-									</li>
-									<li>
-										<button class="delete">Delete</button
-										><button class="edit">Edit</button>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div> -->
-					<!-- info-block -->
-					<!-- <div class="attendant-product-block">
-						<div class="pic-block product-pic-block">
-							<img src="../images/p7.jpeg" alt="product image" />
-							<div class="info">
-								<h6 class="title">Black slippers</h6>
-								<ul class="description description-list">
-									<li>
-										<strong>Category:</strong><span class="span-one">Shoe</span>
-									</li>
-									<li>
-										<strong>Quantity:</strong><span class="span-two">0</span>
-									</li>
-									<li>
-										<strong>Size:</strong><span class="span-three">35</span>
-									</li>
-									<li>
-										<strong>price:</strong><span class="span-four">$12</span>
-									</li>
-									<li>
-										<button class="delete">Delete</button
-										><button class="edit">Edit</button>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div> -->
+				
 					<!-- info-block -->
 				</div>
 				<div class="button-container">
@@ -235,12 +75,13 @@
 				</div>
 				<!-- up-info-container -->
 				<!-- The Modal -->
-				<div id="myModal" class="modal fadeIn">
+				<div id="myModal" class="modal fadeIn updateModal">
 					<!-- Modal content -->
 					<div class="modal-content product-modal-content">
 						<span class="close">&times;</span>
 						<!-- Add category form -->
 						<div class="login-wrapper">
+							<input type="text" id="update-identifier">
 							<h1 class="login-title category-title">Add new product</h1>
 							<form class="login-form category-form add-product">
 								<input
@@ -327,6 +168,7 @@
 
 		<script src="../../andela-developer-challenge/js/jquery.js"></script>
 		<script src="../../andela-developer-challenge/js/main.js"></script>
+		<script src="../../andela-developer-challenge/js/products.js"></script>
 		<script type="text/javascript">
 			(function() {
 				let css = document.createElement("link");

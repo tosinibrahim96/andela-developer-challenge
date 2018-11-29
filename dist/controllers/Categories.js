@@ -42,17 +42,13 @@ class Category {
   * Get all Categories
   */
   static async getAllCategories(req, res) {
-    const userRole = req.user.role;
-    if (userRole === 'admin') {
-      const findAllQuery = 'select * FROM categories';
-      try {
-        const { rows } = await _conn2.default.query(findAllQuery);
-        return res.status(200).send({ rows });
-      } catch (error) {
-        return res.status(400).send({ error });
-      }
+    const findAllQuery = 'select * FROM categories';
+    try {
+      const { rows } = await _conn2.default.query(findAllQuery);
+      return res.status(200).send({ rows });
+    } catch (error) {
+      return res.status(400).send({ error });
     }
-    return res.status(401).send({ Message: 'Unauthorised Action' });
   }
 
   static async getCategory(req, res) {

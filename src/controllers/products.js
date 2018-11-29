@@ -32,7 +32,7 @@ class Product {
 			if (!rows[0]) {
 				return Helper.productNotFound(res);
 			}
-			return res.status(200).send(rows[0]);
+			return res.status(200).send({ rows });
 		} catch (error) {
 			return res.status(400).send(error);
 		}
@@ -84,17 +84,22 @@ class Product {
 			if (result.error) {
 				return Helper.invalidDataMsg(res, result.error);
 			}
-			const findProduct = "SELECT * FROM products WHERE id=$1 AND cat_id=$2";
+			const findProduct = "SELECT * FROM products WHERE id=$1";
+			const verifyCategory = "SELECT * FROM categories WHERE id = $1";
 			const updateProduct = `UPDATE products
-      SET name=$1,cat_id=$2,price=$3,quantity=$4,description=$5
-      WHERE id=$6`;
+      SET name=$1,cat_id=$2,price=$3,quantity=$4,description=$5,image_url=$6
+      WHERE id=$7`;
 			try {
-				const { rows } = await db.query(findProduct, [
-					req.params.id,
-					parseInt(req.body.category_id, 10)
-				]);
+				const { rows } = await db.query(findProduct, [req.params.id]);
 				if (!rows[0]) {
-					res.status(400).send({ message: "The Product not in this category" });
+					res.status(400).send({ message: "The Product does not exist" });
+					return;
+				}
+				const result = await db.query(verifyCategory, [req.body.category_id]);
+				if (result.rowCount == 0) {
+					res
+						.status(400)
+						.send({ message: "The Category does not exist" });
 					return;
 				}
 				const values = [

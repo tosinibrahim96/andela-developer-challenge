@@ -3,7 +3,7 @@ const username = document.getElementById("username");
 const password = document.getElementById("password");
 const loginError = document.querySelector(".login-error");
 loginForm.addEventListener("submit", event => {
-  fetch("https://andela-developer-challenge.herokuapp.com/api/v1/auth/login", {
+	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/auth/login", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json"
