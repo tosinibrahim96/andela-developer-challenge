@@ -38,10 +38,9 @@ const salesIndex = document.querySelector(".sales-information");
 const adminIndex = document.querySelector(".admin-right");
 const updateButton = document.getElementById("loginbutton");
 const attendantSales = document.querySelector(".attendant-sales");
-
+const proceedToCheckout = document.querySelector("#proceedToCheckout");
 
 $(document).ready(() => {
-	let changed = $(".incr").html();
 	$(".admin-box").hide();
 	$("#show").click(function() {
 		$(".attendant-box").hide();
@@ -53,9 +52,6 @@ $(document).ready(() => {
 	});
 	$(".close").click(function() {
 		$("#myModal").hide("fast");
-	});
-	$(".myBtn").click(function() {
-		$(".incr").html(++changed);
 	});
 	$(".btn-close").click(function() {
 		$("#myModal").hide(10);
