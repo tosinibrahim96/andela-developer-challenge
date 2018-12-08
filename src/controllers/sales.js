@@ -1,6 +1,5 @@
 import db from "../models/conn";
 import Helper from "../helper/Helper";
-import { read } from "fs";
 
 class Sale {
 
