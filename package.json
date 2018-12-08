@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "npm install --production",
-    "test": "nyc mocha --require babel-register --require babel-polyfill dist/tests/users.test.js --exit",
+    "test": "nyc mocha --require babel-register --require babel-polyfill src/tests/*.js --exit",
     "build": "babel src --out-dir build",
     "start": "nodemon --exec babel-node ./src/server.js --env",
     "coverage": "nyc report --reporter=text-lcov | coveralls",

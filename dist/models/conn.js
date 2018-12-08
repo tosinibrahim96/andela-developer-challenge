@@ -27,11 +27,7 @@ pool.connect().then(client => {
     console.log(res);
   }).catch(err => {
     client.release();
-    if (err.routine === '_bt_check_unique') {
-      console.log({
-        message: 'User with that EMAIL already exist'
-      });
-    }
+    if (err.routine === '_bt_check_unique') {}
   });
 });
 

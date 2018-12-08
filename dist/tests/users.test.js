@@ -37,7 +37,10 @@ describe('POST /auth', () => {
         res.should.have.status(201);
       });
       _chai2.default.request(_server2.default).get('/api/v1/users').set("token", res.body.token).end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(200);
+      });
+      _chai2.default.request(_server2.default).del('/api/v1/users/2').set("token", res.body.token).end((err, res) => {
+        res.should.have.status(200);
       });
       done(err);
     });
