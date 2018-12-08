@@ -28,8 +28,8 @@ body {
 
 .right {
 	width: 80%;
-  margin: 0 1% 0 5%;
-  position: relative;
+	margin: 0 1% 0 5%;
+	position: relative;
 }
 
 .incr{
@@ -122,6 +122,10 @@ top: -10px;
 	text-align: center;
 	text-transform: capitalize;
 	color: #fefffe;
+}
+
+.logo-sm {
+	font-size: 20px;
 }
 
 /*sidebar*/
@@ -413,6 +417,7 @@ box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .tell-a-friend{
+	margin-top: 1.5em;
 	color: #FF3A44;
 	font-size: 18px;
 	padding-bottom:1em;
@@ -441,14 +446,6 @@ box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
 .cart2{
 	background: #e15960;
-}
-
-.show{
-	position: absolute;
-	width: 100px;
-	background: #ddd;
-	right: 7%;
-	top: 20%;
 }
 
 /* Tooltip tutorial https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip */
@@ -876,25 +873,89 @@ button {
 	border-right: 10px solid white;
 }
 
+.nav-bar {
+	background-color: #ff6663;
+	color: #fff;
+	padding: 10px;
+}
+
+
+#nav-btn {
+	float: right;
+	margin-top: -20px;
+}
+
+
+.clear {
+	clear: both;
+}
+
 /* End of responsive table style */
 /* End of dashboard style */
 @media screen and (max-width: 768px) {
+	.tell-a-friend {
+		margin-top: 1.5em;
+	}
+	.wrapper {
+		display: inherit;
+	}
 	.attendant-block {
 		width: 70%;
 	}
-	#sidebar.active {
-		left: -200px;
+	.left {
+		width: 0;
 	}
-	#sidebar.show {
-		left: 0px;
+	.right {
+		width: 100%;
+	}
+	#sidebar.active {
+		display: none;
+	}
+	@-webkit-keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
 	}
 
-	#sidebar .toggle-btn span {
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+	#sidebar.show {
 		display: block;
-		width: 30px;
-		height: 5px;
-		background: #e15960;
-		margin: 5px 0px;
+		z-index: 2;
+		-webkit-animation: fadeIn 1s;
+		animation: fadeIn 1s;
+	}
+	.add {
+		width: auto;
+		padding: 10px;
+	}
+	.attendant-info-block {
+		width: 100%;
+	}
+	.incr {
+		position: fixed;
+		top: 2%;
+		right: 15%;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background: #214b63;
+		color: #fefefe;
+		font-size: 10px;
+		padding-top: 0.4em;
+		text-align: center;
 	}
 }
 /* Modal styling from https://www.w3schools.com/howto/howto_css_modals.asp*/
@@ -1093,4 +1154,10 @@ height: 100px;
 	text-align: center;
 	color: #e15960;
 	font-size: 30px;
+}
+
+/** Responsiveness **/
+
+@media (max-width: 400px) {
+
 }

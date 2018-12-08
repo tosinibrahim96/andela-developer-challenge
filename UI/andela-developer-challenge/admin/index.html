@@ -8,21 +8,23 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,500' rel='stylesheet' type='text/css'>
    <link rel="stylesheet" media="screen" href="/andela-developer-challenge/styles/main.css" />
-<script src="../../andela-developer-challenge/js/jwt-decode.min.js"></script>
-<script src="../../andela-developer-challenge/js/logged-out.js"></script>
-<script src="../../andela-developer-challenge/js/admin-route.js"></script>
-  </head>
+   <link rel="stylesheet" href="../styles/themify-icons/themify-icons.css">
+   <script src="../../andela-developer-challenge/js/jwt-decode.min.js"></script>
+   <script src="../../andela-developer-challenge/js/logged-out.js"></script>
+   <script src="../../andela-developer-challenge/js/admin-route.js"></script>
+</head>
 
 <body>
    <div class="wrapper">
+      <div class="nav-bar">
+         <h1 class="logo-sm">shoppy</h1>
+         <div id="nav-btn">
+            <i class="ti ti-menu"></i>
+         </div>
+         <div class="clear"></div>
+      </div>
       <div class="left">
          <div id="sidebar" class="active">
-            <div class="toggle-btn">
-               <span></span>
-               <span></span>
-               <span></span>
-            </div>
-            <!-- toggle-button -->
             <h1 id="logo">shoppy</h1>
             <ul>
                <a class="arrow-container" href="#">
@@ -42,7 +44,7 @@
                <a href="sales.html">
                   <li><i class="fas fa-dollar-sign"></i> sales</li>
                </a>
-              <li class="logout-button"><i class="fas fa-sign-out-alt"></i> logout</li>
+               <li class="logout-button"><i class="fas fa-sign-out-alt"></i> logout</li>
 
             </ul>
          </div>
@@ -52,7 +54,7 @@
       <div class="right admin-right">
          <h2 class="container-title">products info</h2>
          <div class="up-info-container">
-           
+
          </div>
          <!-- up-info-container -->
          <div class="button-container">
@@ -65,10 +67,18 @@
    <!-- End of wrapper -->
 
 
-  <script src="../../andela-developer-challenge/js/jquery.js"></script>
-  <script src="../../andela-developer-challenge/js/main.js"></script>
-  <script src="../../andela-developer-challenge/js/admin-index.js"></script>
-   <script type="text/javascript"> (function () { let css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+   <script src="../../andela-developer-challenge/js/jquery.js"></script>
+   <script src="../../andela-developer-challenge/js/main.js"></script>
+   <script src="../../andela-developer-challenge/js/admin-index.js"></script>
+   <script type="text/javascript">
+      (function () {
+         let css = document.createElement('link');
+         css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css';
+         css.rel = 'stylesheet';
+         css.type = 'text/css';
+         document.getElementsByTagName('head')[0].appendChild(css);
+      })();
+   </script>
 </body>
 
 </html>

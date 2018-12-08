@@ -96,7 +96,7 @@ const createPicture = (data, index) => {
 
 if (testImage) {
 
-	fetch("http://localhost:3000/api/v1/products/", {
+	fetch("https://andela-developer-challenge.herokuapp.com/api/v1/products/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -179,4 +179,3 @@ if (proceedToCheckout) {
 	// 		}
 	// 	})
 	// 	.catch(error => console.log(error));
-	console.log("yes");

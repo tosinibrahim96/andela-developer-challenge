@@ -1,4 +1,5 @@
 const togggleButton = document.querySelector(".toggle-btn");
+const navButton = document.getElementById("nav-btn");
 const sidebar = document.getElementById("sidebar");
 let input, filter, table, tr, td, i;
 input = document.getElementById("myInput");
@@ -59,8 +60,7 @@ $(document).ready(() => {
 });
 
 toggleSidebar = () => {
-	sidebar.classList.toggle("active");
-	sidebar.classList.toggle("show");
+	sidebar.classList.toggle('show');
 };
 
 searchProduct = () => {
@@ -98,9 +98,12 @@ if (input) {
 	input.addEventListener("keyup", searchProduct);
 }
 
+if (navButton) {
+	navButton.addEventListener("click", toggleSidebar);
+}
+
 if (btn) {
 	btn.addEventListener("click", showModal);
-	togggleButton.addEventListener("click", toggleSidebar);
 }
 
 if (logoutButton) {

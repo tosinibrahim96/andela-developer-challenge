@@ -1,4 +1,6 @@
-import { Pool } from 'pg';
+import {
+  Pool
+} from 'pg';
 import dotenv from 'dotenv';
 import allTables from './schema';
 
@@ -16,9 +18,12 @@ pool.connect()
         console.log(res);
       })
       .catch((err) => {
-        client.release(); if (err.routine === '_bt_check_unique') {
-          console.log({ message: 'User with that EMAIL already exist' });
-         
+        client.release();
+        if (err.routine === '_bt_check_unique') {
+          console.log({
+            message: 'User with that EMAIL already exist'
+          });
+
         }
       });
   });

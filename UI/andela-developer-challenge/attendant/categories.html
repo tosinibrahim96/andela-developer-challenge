@@ -8,20 +8,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Montserrat:400,500' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" media="screen" href="/andela-developer-challenge/styles/main.css" />
-<script src="../../andela-developer-challenge/js/jwt-decode.min.js"></script>
-<script src="../../andela-developer-challenge/js/logged-out.js"></script>
+  <link rel="stylesheet" href="../styles/themify-icons/themify-icons.css">
+  <script src="../../andela-developer-challenge/js/jwt-decode.min.js"></script>
+  <script src="../../andela-developer-challenge/js/logged-out.js"></script>
 </head>
 
 <body>
   <div class="wrapper">
+    <div class="nav-bar">
+      <h1 class="logo-sm">shoppy</h1>
+      <div id="nav-btn">
+        <i class="ti ti-menu"></i>
+      </div>
+      <div class="clear"></div>
+    </div>
     <div class="left">
       <div id="sidebar" class="active">
-        <div class="toggle-btn">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <!-- toggle-button -->
         <h1 id="logo">shoppy</h1>
         <ul>
           <a href="index.html">
@@ -49,7 +51,7 @@
       <h2 class="attendant-container-title">product categories</h2>
       <p class="tell-a-friend">tell people about types of our products</p>
       <div class="up-info-container attendant-info-container category-index">
-        
+
         <!-- info-block -->
       </div>
       <div class="button-container">
@@ -66,7 +68,15 @@
   <script src="../../andela-developer-challenge/js/jquery.js"></script>
   <script src="../../andela-developer-challenge/js/main.js"></script>
   <script src="../../andela-developer-challenge/js/categories.js"></script>
-  <script type="text/javascript"> (function () { let css = document.createElement('link'); css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+  <script type="text/javascript">
+    (function () {
+      let css = document.createElement('link');
+      css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css';
+      css.rel = 'stylesheet';
+      css.type = 'text/css';
+      document.getElementsByTagName('head')[0].appendChild(css);
+    })();
+  </script>
 </body>
 
 </html>
