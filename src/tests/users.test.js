@@ -36,7 +36,13 @@ describe('POST /auth', () => {
           .get('/api/v1/users')
           .set("token", res.body.token)
           .end((err, res) => {
-            res.should.have.status(201);
+            res.should.have.status(200);
+          });
+        chai.request(server)
+          .del('/api/v1/users/2')
+          .set("token", res.body.token)
+          .end((err, res) => {
+            res.should.have.status(200);
           });
         done(err);
       });
